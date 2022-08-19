@@ -19,14 +19,14 @@ PESERTA : [
         ],
   - SIDEBAR : [
       - Data Absensi : [
-         - Tanggal Pertemuan
-         - No Pertemuan
-         - Tanggal Pertemuan
-         - Nama Pembimbing
-         - Jam
-         - Lokasi
-         - Status
-         - Keterangan
+          - Tanggal Pertemuan
+          - No Pertemuan
+          - Tanggal Pertemuan
+          - Nama Pembimbing
+          - Jam
+          - Lokasi
+          - Status
+          - Keterangan
       ],
       - Kegiatanku : [
         - Judul Kegiatan

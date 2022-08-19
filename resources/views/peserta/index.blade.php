@@ -1,44 +1,89 @@
 @extends('peserta/layouts/body')
 
 @section('content')
-<div class="container-xl">
-  <div class="app-card alert alert-dismissible shadow-sm mb-4 border-left-decoration" role="alert">
-      <div class="inner">
-          <div class="app-card-body p-3 p-lg-4">
-              <h3 class="mb-3">Welcome, developer!</h3>
-              <div class="row gx-5 gy-3">
-                  <div class="col-12 col-lg-9">
+<div class="container-xl relative">
+    <div class="row w-100 align-items-center">
+        <div class="col-md-9 border-3 overflow-scroll list-activities mb-5">
+            <h1 class="fs-2 mb-3">List Kegiatan</h1>
+            @for ($i = 0; $i < 10; $i++)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Membuat Aplikasi Management Kinerja Anak Magang</h5>
+                    <p class="card-text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore non rerum
+                        doloremque possimus eaque maiores, ducimus architecto iusto, quas exercitationem blanditiis ex.
+                        Reprehenderit nihil officiis rem architecto et, esse optio.
+                    </p>
+                    <div class="d-flex justify-content-end align-items-center">
+                        <a href="/peserta/detail-kegiatan/{{ $i+1 }}" class="btn btn-primary text-white">
+                            <i class='bx bx-log-in-circle bx-sm'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            @endfor
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <img src="{{ asset('/template/assets/images/users/user-1.jpg') }}"
+                    class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Muhammad Nabil Wafi</h5>
+                    <hr />
 
-                      <div>Portal is a free Bootstrap 5 admin dashboard template. The design is simple,
-                          clean and modular so it's a great base for building any modern web app.</div>
-                  </div>
-                  <!--//col-->
-                  <div class="col-12 col-lg-3">
-                      <a class="btn app-btn-primary"
-                          href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/"><svg
-                              width="1em" height="1em" viewBox="0 0 16 16"
-                              class="bi bi-file-earmark-arrow-down me-2" fill="currentColor"
-                              xmlns="http://www.w3.org/2000/svg">
-                              <path
-                                  d="M4 0h5.5v1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h1V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2z" />
-                              <path d="M9.5 3V0L14 4.5h-3A1.5 1.5 0 0 1 9.5 3z" />
-                              <path fill-rule="evenodd"
-                                  d="M8 6a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 10.293V6.5A.5.5 0 0 1 8 6z" />
-                          </svg>Free Download</a>
-                  </div>
-                  <!--//col-->
-              </div>
-              <!--//row-->
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-          <!--//app-card-body-->
+                    <ul class="list-group list-group-flush">
+                        <li class="row mb-4">
+                            <div class="col-md-6">
+                                <span class="fw-bold">Divisi:</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Pemrograman Web</span>
+                            </div>
+                        </li>
+                        <li class="row mb-4">
+                            <div class="col-md-6">
+                                <span class="fw-bold">Instansi Pendidikan:</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Universitas Komputer Indonesia</span>
+                            </div>
+                        </li>
+                        <li class="row mb-4">
+                            <div class="col-md-6">
+                                <span class="fw-bold">Jurusan:</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Sistem Informasi</span>
+                            </div>
+                        </li>
+                        <li class="row mb-4">
+                            <div class="col-md-6">
+                                <span class="fw-bold">Nama Pembimbing:</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>Rizki Nur Zhifar</span>
+                            </div>
+                        </li>
+                        <li class="row mb-4">
+                            <div class="col-md-6">
+                                <span class="fw-bold">Lama PKL:</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span>1 Bulan</span>
+                            </div>
+                        </li>
+                    </ul>
 
-      </div>
-      <!--//inner-->
-  </div>
+                    <div>
+                        <a href="" class="w-100 btn btn-primary me-2">Update</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection()
 
 @section('head')
-    <title>Peserta Dashboard</title>
+<title>Peserta Dashboard</title>
 @endsection
