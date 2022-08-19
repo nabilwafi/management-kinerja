@@ -33,8 +33,14 @@ Route::controller(AdminController::class)->group(function () {
 });
 
 // Peserta
-Route::controller(PesertaController::class)->group(function () {
-    Route::get('/peserta', 'index');
+Route::controller(PesertaController::class)->group(function() {
+    Route::prefix('peserta')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num');
+        Route::get('/absensi/{num}', 'dataAbsensi')->whereNumber('num');
+        Route::get('/history-kegiatan/{num}', 'historyKegiatan')->whereNumber('num');
+        Route::get('/detail-kegiatan/{num}', 'detailKegiatan')->whereNumber('num');
+    });
 });
 
 // Pembimbing

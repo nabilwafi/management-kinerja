@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Index Peserta */
+.card-number {
+  font-size: 1.2rem;
+}
+
+.list-activities {
+  height: 80vh;
+}
+
+.list-activities::-webkit-scrollbar {
+  display: none;
+}
+/* End of Index Peserta */
