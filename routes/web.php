@@ -25,19 +25,22 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Admin
-Route::controller(AdminController::class)->group(function() {
+Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index');
+    Route::get('/admin/peserta', 'dataPeserta');
+    Route::get('/admin/pembimbing', 'dataPembimbing');
+    Route::get('/admin/kegiatan', 'dataKegiatan');
 });
 
 // Peserta
-Route::controller(PesertaController::class)->group(function() {
+Route::controller(PesertaController::class)->group(function () {
     Route::get('/peserta', 'index');
 });
 
 // Pembimbing
-Route::controller(PembimbingController::class)->group(function() {
+Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing', 'index');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

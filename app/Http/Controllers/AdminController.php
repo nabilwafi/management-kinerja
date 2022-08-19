@@ -10,4 +10,16 @@ class AdminController extends Controller
     {
         return view('admin/home');
     }
+    public function dataPeserta()
+    {
+        return view('admin/pages/peserta');
+    }
+    public function dataPembimbing()
+    {
+        return view('admin/pages/pembimbing');
+    }
+    public function dataKegiatan()
+    {
+        return view('admin/pages/kegiatan');
+    }
 }

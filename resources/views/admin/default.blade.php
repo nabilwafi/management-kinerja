@@ -14,10 +14,10 @@
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
-    <script defer src="template/assets/plugins/fontawesome/js/all.min.js"></script>
+    <script defer src="/template/assets/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
-    <link id="theme-style" rel="stylesheet" href="template/assets/css/portal.css">
+    <link id="theme-style" rel="stylesheet" href="/template/assets/css/portal.css">
 
 </head>
 
@@ -52,15 +52,15 @@
 
 
     <!-- Javascript -->
-    <script src="template/assets/plugins/popper.min.js"></script>
-    <script src="template/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/template/assets/plugins/popper.min.js"></script>
+    <script src="/template/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Charts JS -->
-    <script src="template/assets/plugins/chart.js/chart.min.js"></script>
-    <script src="template/assets/js/index-charts.js"></script>
+    <script src="/template/assets/plugins/chart.js/chart.min.js"></script>
+    <script src="/template/assets/js/index-charts.js"></script>
 
     <!-- Page Specific JS -->
-    <script src="template/assets/js/app.js"></script>
+    <script src="/template/assets/js/app.js"></script>
 
 </body>
 
