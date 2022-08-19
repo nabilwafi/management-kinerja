@@ -47,8 +47,10 @@ Route::controller(PesertaController::class)->group(function() {
 Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing', 'index');
     Route::get('/pembimbing/peserta', 'dataPeserta');
-    Route::get('/pembimbing/pertemuan', 'dataPertemuan');
+    // Route::get('/pembimbing/pertemuan', 'dataPertemuan');
     Route::get('/pembimbing/detailabsensi', 'dataDetailAbsensi');
+    Route::get('/pembimbing/tambahpertemuan', 'dataTambahPertemuan');
+    Route::get('/pembimbing/editabsensi', 'dataEditAbsensi');
 });
 
 

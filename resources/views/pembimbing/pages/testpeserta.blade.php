@@ -1,8 +1,7 @@
 @extends('pembimbing/layouts/body')
 
 @section('content')
-<h1 class="app-page-title">Detail Absensi (nama peserta)</h1>
-<a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan">Tambah Pertemuan</a>
+<h1 class="app-page-title">List Peserta</h1>
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -11,28 +10,35 @@
                     <table class="table app-table-hover mb-0 text-left">
                         <thead>
                             <tr>
-                                <th class="cell">Tanggal Pertemuan</th>
-                                <th class="cell">No Pertemuan</th>
-                                <th class="cell">Jam</th>
-                                <th class="cell">Lokasi</th>
-                                <th class="cell">Status</th>
-                                <th class="cell">Keterangan</th>
+                                <th class="cell">Foto</th>
+                                <th class="cell">Nama</th>
+                                <th class="cell">Instansi</th>
+                                <th class="cell">Jurusan</th>
+                                <th class="cell">Divisi</th>
+                                <th class="cell">Absensi</th>
                                 <th class="cell"></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @unless (empty($peserta))
+                            @foreach ($peserta)
+                                
                             <tr>
-                                <td class="cell">15 Agustus 2022</td>
-                                <td class="cell">1</td>
-                                <td class="cell">09:30</td>
-                                <td class="cell">Diskominfo Bandung</td>
-                                <td class="cell"><span class="badge bg-success">HADIR</span></td>
-                                <td class="cell">Pertemuan pertama dan pengenalan</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="/pembimbing/editabsensi">Update</a>
+                                <td>{{$peserta->id}}</td>
+
+                                {{-- <td class="cell"><img src="/template/assets/images/users/user-1.jpg" alt="user1" width="50px"></td>
+                                <td class="cell">John Sanders</td>
+                                <td class="cell">UNIKOM</td>
+                                <td class="cell">Sistem Informasi</td>
+                                <td class="cell">Aplikasi Web</td>
+                                <td class="cell">15</td>
+                                <td class="cell text-center"> --}}
+                                    <a class="btn btn-info" href="/pembimbing/detailabsensi/">Detail Absensi</a>
+                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
                                 </td>
                             </tr>
+                            @endforeach    
+                            @endunless
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->

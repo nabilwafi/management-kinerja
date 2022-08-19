@@ -22,4 +22,12 @@ class PembimbingController extends Controller
     {
         return view ('pembimbing/pages/detailabsensi');
     }
+    public function dataTambahPertemuan()
+    {
+        return view ('pembimbing/pages/tambahpertemuan');
+    }
+    public function dataEditAbsensi()
+    {
+        return view ('pembimbing/pages/editabsensi');
+    }
 }
