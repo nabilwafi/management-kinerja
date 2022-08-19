@@ -28,72 +28,10 @@
                                 <td class="cell">Aplikasi Web</td>
                                 <td class="cell">15</td>
                                 <td class="cell text-center">
-                                <a class="btn btn-info" href="/pembimbing/detailabsensi">Detail Absensi</a>
+                                <a class="btn btn-info" href="/pembimbing/detailabsensi/">Detail Absensi</a>
                                     <a class="btn btn-primary" href="#">Detail Kinerja</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-2.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">Teresa Holland</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-info" href="#">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-3.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">Dylan Ambrose</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-info" href="#">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
-                                </td>
-                            </tr>                            
-                            <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-4.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">Jayden Massey</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-info" href="#">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
-                                </td>
-                            </tr>  
-                            <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-5.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">Reina Brooks</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-info" href="#">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-6.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">Raymond Atkins</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
-                                <td class="cell text-center">
-                                <a class="btn btn-info" href="#">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
-                                </td>
-                            </tr>
-                            
-
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->
