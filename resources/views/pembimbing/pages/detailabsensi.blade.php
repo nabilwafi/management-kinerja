@@ -1,7 +1,7 @@
 @extends('pembimbing/layouts/body')
 
 @section('content')
-<h1 class="app-page-title">List Peserta</h1>
+<h1 class="app-page-title">Detail Absensi (nama peserta)</h1>
 <a class="btn btn-primary mb-3" href="#">Tambah Pertemuan</a>
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -13,6 +13,9 @@
                             <tr>
                                 <th class="cell">Tanggal Pertemuan</th>
                                 <th class="cell">No Pertemuan</th>
+                                <th class="cell">Jam</th>
+                                <th class="cell">Lokasi</th>
+                                <th class="cell">Status</th>
                                 <th class="cell">Keterangan</th>
                                 <th class="cell"></th>
                             </tr>
@@ -21,6 +24,9 @@
                             <tr>
                                 <td class="cell">15 Agustus 2022</td>
                                 <td class="cell">1</td>
+                                <td class="cell">09:30</td>
+                                <td class="cell">Diskominfo Bandung</td>
+                                <td class="cell">HADIR</td>
                                 <td class="cell">Pertemuan pertama dan pengenalan</td>
                                 <td class="cell text-center">
                                 <a class="btn btn-danger" href="#">Delete</a>

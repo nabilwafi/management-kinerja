@@ -18,4 +18,8 @@ class PembimbingController extends Controller
     {
         return view ('pembimbing/pages/pertemuan');
     }
+    public function dataDetailAbsensi()
+    {
+        return view ('pembimbing/pages/detailabsensi');
+    }
 }

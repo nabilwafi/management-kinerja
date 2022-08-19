@@ -41,9 +41,9 @@
                   <!--//nav-link-->
               </li>
               <!--//nav-item-->
-              <li class="nav-item">
+              <!-- <li class="nav-item"> -->
                   <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                  <a class="nav-link" href="/pembimbing/pertemuan">
+                  <!-- <a class="nav-link" href="/pembimbing/pertemuan">
                       <span class="nav-icon">
                           <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
                               fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -57,9 +57,9 @@
                           </svg>
                       </span>
                       <span class="nav-link-text">List Pertemuan</span>
-                  </a>
+                  </a> -->
                   <!--//nav-link-->
-              </li>
+              <!-- </li> -->
               <!--//nav-item-->
 
               <!--//nav-item-->
