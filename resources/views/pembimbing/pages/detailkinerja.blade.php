@@ -20,7 +20,7 @@
         <h6 class="">Total Durasi Pengerjaan (Sub Kegiatan) : 20 Jam</h6>
     </div>
     <div class="col-4">
-        <a class="btn btn-success offset-md-8 p" href="#">Export to PDF</a>
+        <a class="btn btn-success offset-md-7" href="#">Export to Excel</a>
     </div>
 </div>
 </div>
