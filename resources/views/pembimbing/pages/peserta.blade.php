@@ -29,7 +29,7 @@
                                 <td class="cell">15</td>
                                 <td class="cell text-center">
                                 <a class="btn btn-info" href="/pembimbing/detailabsensi/">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="#">Detail Kinerja</a>
+                                    <a class="btn btn-primary" href="/pembimbing/detailkinerja/">Detail Kinerja</a>
                                 </td>
                             </tr>
                         </tbody>
