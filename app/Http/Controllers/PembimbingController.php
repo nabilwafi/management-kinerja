@@ -30,4 +30,8 @@ class PembimbingController extends Controller
     {
         return view ('pembimbing/pages/editabsensi');
     }
+    public function dataDetailKinerja()
+    {
+        return view ('pembimbing/pages/detailkinerja');
+    }
 }

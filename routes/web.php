@@ -53,6 +53,7 @@ Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing/detailabsensi', 'dataDetailAbsensi');
     Route::get('/pembimbing/tambahpertemuan', 'dataTambahPertemuan');
     Route::get('/pembimbing/editabsensi', 'dataEditAbsensi');
+    Route::get('/pembimbing/detailkinerja', 'dataDetailKinerja');
 });
 
 
