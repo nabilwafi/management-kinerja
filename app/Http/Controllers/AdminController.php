@@ -18,6 +18,10 @@ class AdminController extends Controller
     {
         return view('admin/pages/pembimbing');
     }
+    public function tambahPembimbing()
+    {
+        return view('admin/pages/tambahpembimbing');
+    }
     public function dataKegiatan()
     {
         return view('admin/pages/kegiatan');

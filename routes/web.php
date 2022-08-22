@@ -29,6 +29,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index');
     Route::get('/admin/peserta', 'dataPeserta');
     Route::get('/admin/pembimbing', 'dataPembimbing');
+    Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');
+
     Route::get('/admin/kegiatan', 'dataKegiatan');
 });
 
