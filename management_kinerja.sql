@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2022 at 02:37 PM
+-- Generation Time: Aug 23, 2022 at 03:35 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -176,6 +176,7 @@ CREATE TABLE `pembimbings` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_pembimbing` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gambar_pembimbing` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `divisi` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jabatan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('peserta','pembimbing','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pembimbing',
@@ -187,8 +188,8 @@ CREATE TABLE `pembimbings` (
 -- Dumping data for table `pembimbings`
 --
 
-INSERT INTO `pembimbings` (`id`, `email`, `password`, `nama_pembimbing`, `divisi`, `jabatan`, `role`, `created_at`, `updated_at`) VALUES
-(1, 'pembimbing1@pembimbing.com', '$2y$10$4EgWJPW8W3HKbAzkjrxAj.a.h8TfnhzUJw6g210iF4WPkJZMKuMpG', 'Jono Setiawan', 'Frontend Developer', 'Lead Frontend Developer', 'pembimbing', '2022-08-23 04:43:44', '2022-08-23 04:43:44');
+INSERT INTO `pembimbings` (`id`, `email`, `password`, `nama_pembimbing`, `gambar_pembimbing`, `divisi`, `jabatan`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'pembimbing1@pembimbing.com', '$2y$10$4EgWJPW8W3HKbAzkjrxAj.a.h8TfnhzUJw6g210iF4WPkJZMKuMpG', 'Jono Setiawan', NULL, 'Frontend Developer', 'Lead Frontend Developer', 'pembimbing', '2022-08-23 04:43:44', '2022-08-23 04:43:44');
 
 -- --------------------------------------------------------
 
@@ -221,6 +222,7 @@ CREATE TABLE `pesertas` (
   `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_peserta` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gambar_peserta` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `instansi_pendidikan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jurusan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('peserta','pembimbing','admin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'peserta',
@@ -232,8 +234,8 @@ CREATE TABLE `pesertas` (
 -- Dumping data for table `pesertas`
 --
 
-INSERT INTO `pesertas` (`id`, `id_pembimbing`, `email`, `password`, `nama_peserta`, `instansi_pendidikan`, `jurusan`, `role`, `created_at`, `updated_at`) VALUES
-(1, 1, 'peserta@peserta', '$2y$10$FT5kqaYkJTd2alw4L7j58uuCuR4SSHLrwxfRYSTZTB8a4kGeX9.4K', 'Nabil Wafi', 'Universitas Komputer Indonesia', 'Sistem Informasi', 'peserta', '2022-08-23 04:48:40', '2022-08-23 04:48:40');
+INSERT INTO `pesertas` (`id`, `id_pembimbing`, `email`, `password`, `nama_peserta`, `gambar_peserta`, `instansi_pendidikan`, `jurusan`, `role`, `created_at`, `updated_at`) VALUES
+(1, 1, 'peserta@peserta', '$2y$10$FT5kqaYkJTd2alw4L7j58uuCuR4SSHLrwxfRYSTZTB8a4kGeX9.4K', 'Nabil Wafi', NULL, 'Universitas Komputer Indonesia', 'Sistem Informasi', 'peserta', '2022-08-23 04:48:40', '2022-08-23 04:48:40');
 
 -- --------------------------------------------------------
 
