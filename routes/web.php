@@ -24,6 +24,9 @@ Route::get('/form/register', function() {
     return view('form/register');
 });
 
+//Percobaan
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

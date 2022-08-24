@@ -29,24 +29,24 @@
 					<h2 class="auth-heading text-center mb-4">Pendaftaran Peserta</h2>					
 	
 					<div class="auth-form-container text-start mx-auto">
-						<form class="auth-form auth-signup-form" action="" method="post">         
+						<form class="auth-form auth-signup-form" action="{{ route('') }}" method="post">         
 							<div class="email mb-3">
-								<label class="sr-only">Nama Lengkap</label>
+								<label class="sr-only" for="nama">Nama Lengkap</label>
 								<input id="nama" name="nama" type="text" class="form-control signup-name" placeholder="Nama Lengkap" required="required">
 							</div>
 							<div class="email mb-3">
-								<label class="sr-only">Instansi</label>
+								<label class="sr-only" for="instansi">Instansi</label>
 								<input id="instansi" name="instansi" type="text" class="form-control signup-name" placeholder="Instansi" required="required">
 							</div>
 							<div class="email mb-3">
-								<label class="sr-only">Jurusan</label>
+								<label class="sr-only" for ="jurusan">Jurusan</label>
 								<input id="jurusan" name="jurusan" type="text" class="form-control signup-name" placeholder="Jurusan" required="required">
 							</div>							
 							<div class="email mb-3">
-								<label class="sr-only">Email</label>
+								<label class="sr-only" for="email">Email</label>
 								<input id="email" name="email" type="email" class="form-control signup-email" placeholder="Email" required="required">
 							</div>
-							<div class="password mb-3">
+							<div class="password mb-3"for="password">
 								<label class="sr-only">Password</label>
 								<input id="password" name="password" type="password" class="form-control signup-password" placeholder="Password" required="required">
 							</div>
@@ -57,7 +57,7 @@
 							</div>
 						</form><!--//auth-form-->
 						
-						<div class="auth-option text-center pt-5">Sudah punya akun? <a class="text-link" href="" >Log in</a></div>
+						<div class="auth-option text-center pt-5">Sudah punya akun? <a class="text-link" href="{{ url('') }}" >Log in</a></div>
 					</div><!--//auth-form-container-->	
 					
 					
