@@ -14,53 +14,22 @@
                         <thead>
                             <tr>
                                 <th class="cell">Judul Kegiatan</th>
+                                <th class="cell">Keteragan Kegiatan</th>
                                 <th class="cell">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($kegiatan as $kegi)
+                                
+                            @endforeach
                             <tr>
-                                <td class="cell">Aplikasi Web</td>
+                                <td class="cell">{{ $kegi->kegiatan }}</td>
+                                <td class="cell">{{ $kegi->keterangan }}</td>
                                 <td class="cell">
                                     <a class="btn btn-danger" href="#">Delete</a>
                                     <a class="btn btn-warning" href="#">Update</a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
-                                </td>
-                            </tr>                            
-                            <tr>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
-                                </td>
-                            </tr>  
-                            <tr>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
-                                </td>
-                            </tr>
-                            
 
                         </tbody>
                     </table>

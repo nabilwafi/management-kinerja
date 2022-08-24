@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('form/login');
 });
 
-Route::get('/form/register', function() {
+Route::get('/form/register', function () {
     return view('form/register');
 });
 
@@ -35,12 +35,15 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/peserta', 'dataPeserta');
     Route::get('/admin/pembimbing', 'dataPembimbing');
     Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');
-
+    Route::get('/admin/pembimbing/update/{id}', 'updatePembimbing');
+    Route::post('/admin/pembimbing/update/baru', 'saveUpdatePembimbing');
+    Route::get('/admin/pembimbing/delete/{id}', 'deletePembimbing');
     Route::get('/admin/kegiatan', 'dataKegiatan');
 });
+Route::resource('/admin/pembimbing/tambah/baru', AdminController::class);
 
 // Peserta
-Route::controller(PesertaController::class)->group(function() {
+Route::controller(PesertaController::class)->group(function () {
     Route::prefix('peserta')->group(function () {
         Route::get('/', 'index');
         Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num');
