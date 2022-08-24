@@ -33,19 +33,36 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Admin
-Route::controller(AdminController::class)->group(function() {
+Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index');
+    Route::get('/admin/peserta', 'dataPeserta');
+    Route::get('/admin/pembimbing', 'dataPembimbing');
+    Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');
+
+    Route::get('/admin/kegiatan', 'dataKegiatan');
 });
 
 // Peserta
 Route::controller(PesertaController::class)->group(function() {
-    Route::get('/peserta', 'index');
+    Route::prefix('peserta')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num');
+        Route::get('/absensi/{num}', 'dataAbsensi')->whereNumber('num');
+        Route::get('/history-kegiatan/{num}', 'historyKegiatan')->whereNumber('num');
+        Route::get('/detail-kegiatan/{num}', 'detailKegiatan')->whereNumber('num');
+    });
 });
 
 // Pembimbing
-Route::controller(PembimbingController::class)->group(function() {
+Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing', 'index');
+    Route::get('/pembimbing/peserta', 'dataPeserta');
+    // Route::get('/pembimbing/pertemuan', 'dataPertemuan');
+    Route::get('/pembimbing/detailabsensi', 'dataDetailAbsensi');
+    Route::get('/pembimbing/tambahpertemuan', 'dataTambahPertemuan');
+    Route::get('/pembimbing/editabsensi', 'dataEditAbsensi');
+    Route::get('/pembimbing/detailkinerja', 'dataDetailKinerja');
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

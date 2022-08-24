@@ -1,0 +1,114 @@
+PESERTA : [
+   - CONTENT INDEX : 
+        - LIST KEGIATAN : [
+			    - Judul Kegiatan
+          - Deskripsi Kegiatan
+          - Nama Pembimbing
+          - Jumlah Peserta
+          - Divisi
+			  ],
+        - PROFILE PESERTA : [
+          - Nama
+          - Foto Profile
+          - No Telp
+          - Instansi
+          - Jurusan
+          - Divisi
+          - Nama Pembimbing
+          - Lama PKL
+        ],
+  - SIDEBAR : [
+      - Data Absensi : [
+          - Tanggal Pertemuan
+          - No Pertemuan
+          - Tanggal Pertemuan
+          - Nama Pembimbing
+          - Jam
+          - Lokasi
+          - Status
+          - Keterangan
+      ],
+      - Kegiatanku : [
+        - Judul Kegiatan
+        - Sub Kegiatan
+        - Keterangan
+        - Status
+      ],
+      - History Kegiatan : [
+        - Judul Kegiatan
+        - Sub Kegiatan
+        - Keterangan
+        - Total Pengerjaan
+        - Status
+      ],
+  ]
+]
+
+PEMBIMBING : [
+  - Card Count Data Peserta
+  - SIDEBAR : [
+    - List Peserta : [
+      - Nama Peserta
+      - Divisi Peserta
+      - Instansi
+      - Jurusan
+      - Foto Profile
+      - Absensi
+      - Aksi : [
+        - redirect -> List Absen Per Peserta
+        - redirect -> per kinerja
+      ]
+    ],
+    - List Pertemuan : [
+      - Tambah Pertemuan (Aksi tapi bukan bagian dari table)
+      - Tanggal Pertemuan
+      - No Pertemuan
+      - Keterangan
+      - Aksi [
+        - Delete
+        - Update
+      ]
+    ]
+  ]
+]
+
+ADMIN : [
+  - HOME : [
+    - Card Count Peserta,
+    - Card Count Pembimbing,
+    - Card Count Kegiatan
+  ],
+  - SIDEBAR : [
+    - List Peserta: [
+      - Foto Peserta,
+      - Nama Peserta,
+      - Instansi
+      - Jurusan
+      - Divisi
+      - Lama PKL
+      - Aksi : [
+        - Delete
+        - Update
+      ]
+    ],
+    - List Pembimbing: [
+      - Tambah Pembimbing,
+      - Foto Pembimbing,
+      - Nama Pembimbing
+      - Divisi
+      - Jabatan
+      - Aksi : [
+        - Update
+        - Delete
+      ]
+    ],
+    - List Kegiatan: [
+      - Tambah Kegiatan
+      - Judul Kegiatan,
+      - Aksi : [
+        - Update
+        - Delete
+      ]
+    ],
+  ]
+]
