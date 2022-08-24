@@ -1,7 +1,7 @@
 @extends('/admin/default')
 
 @section('content')
-<h1 class="app-page-title">ini adalah Halaman pembimbing uhuuyy</h1>
+<h1 class="app-page-title">Pembimbing</h1>
 <div class="col-6 col-lg-3 mb-3">
     <a class="btn app-btn-primary" href="/admin/pembimbing/tambah"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -30,14 +30,14 @@
                         <tbody>
                             @foreach ($pembimbing as $pmbng)
                             <tr>
-                                <td class="cell"><img src="/template/assets/images/users/{{ $pmbng->gambar_pembimbing }}" alt="user1" width="50px"></td>
+                                <td class="cell"><img src="/template/assets/images/users/{{ $pmbng->gambar_pembimbing }}" width="50px"></td>
                                 <td class="cell">{{ $pmbng->email }}</td>
                                 <td class="cell">{{ $pmbng->nama_pembimbing }}</td>
                                 <td class="cell">{{ $pmbng->divisi }}</td>
                                 <td class="cell">{{ $pmbng->jabatan }}</td>
                                 <td class="cell text-center">
+                                <a class="btn btn-warning" href="/admin/pembimbing/update/{{ $pmbng->id }}">Update</a>
                                 <a class="btn btn-danger" href="/admin/pembimbing/delete/{{ $pmbng->id }}">Delete</a>
-                                    <a class="btn btn-warning" href="/admin/pembimbing/update/{{ $pmbng->id }}">Update</a>
                                 </td>
                             </tr>
                             @endforeach

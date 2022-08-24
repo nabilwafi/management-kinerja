@@ -32,14 +32,24 @@ Route::get('/dashboard', function () {
 // Admin
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin', 'index');
+    //admin peserta
     Route::get('/admin/peserta', 'dataPeserta');
+    Route::get('/admin/peserta/update/{id}', 'updatepeserta');
+    Route::post('/admin/peserta/update/baru', 'saveUpdatepeserta');
+    Route::get('/admin/peserta/delete/{id}', 'deletepeserta');
+    //admin pembimbing
     Route::get('/admin/pembimbing', 'dataPembimbing');
     Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');
     Route::get('/admin/pembimbing/update/{id}', 'updatePembimbing');
     Route::post('/admin/pembimbing/update/baru', 'saveUpdatePembimbing');
     Route::get('/admin/pembimbing/delete/{id}', 'deletePembimbing');
+    //admin kegiatan
     Route::get('/admin/kegiatan', 'dataKegiatan');
+    Route::get('/admin/kegiatan/update/{id}', 'updateKegiatan');
+    Route::post('/admin/kegiatan/update/baru', 'saveUpdateKegiatan');
+    Route::get('/admin/kegiatan/delete/{id}', 'deleteKegiatan');
 });
+//admin tambah pembimbing
 Route::resource('/admin/pembimbing/tambah/baru', AdminController::class);
 
 // Peserta

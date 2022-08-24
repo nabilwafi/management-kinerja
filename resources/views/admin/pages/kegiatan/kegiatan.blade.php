@@ -1,7 +1,7 @@
 @extends('admin/default')
 
 @section('content')
-<h1 class="app-page-title">ini adalah Halaman Kegiatan uhuuyy</h1>
+<h1 class="app-page-title">Kegiatan</h1>
 <div class="col-6 col-lg-3 mb-3">
     <a class="btn app-btn-primary" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
         <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
@@ -15,7 +15,10 @@
                             <tr>
                                 <th class="cell">Judul Kegiatan</th>
                                 <th class="cell">Keteragan Kegiatan</th>
-                                <th class="cell">Aksi</th>
+                                <th class="cell"></th>
+                                <th class="cell"></th>
+                                <th class="cell"></th>
+                                <th class="cell"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -26,8 +29,15 @@
                                 <td class="cell">{{ $kegi->kegiatan }}</td>
                                 <td class="cell">{{ $kegi->keterangan }}</td>
                                 <td class="cell">
-                                    <a class="btn btn-danger" href="#">Delete</a>
-                                    <a class="btn btn-warning" href="#">Update</a>
+                                </td>
+                                <td class="cell">
+                                    <a class="btn btn-primary" href="#">Tambah Sub Kegiatan</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-warning" href="/admin/kegiatan/update/{{ $kegi->id }}">Update</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="/admin/kegiatan/delete/{{ $kegi->id }}">Delete</a>
                                 </td>
                             </tr>
 
