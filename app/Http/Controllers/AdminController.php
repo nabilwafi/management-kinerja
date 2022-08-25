@@ -73,7 +73,7 @@ class AdminController extends Controller
             "title" => "Tambah Pembimbing"
         ]);
     }
-    public function store(Request $request)
+    public function savePembimbing(Request $request)
     {
         DB::table('pembimbings')->insert([
             'email' => $request->email,
@@ -126,6 +126,23 @@ class AdminController extends Controller
             "kegiatan" => $kegiatans
         ]);
     }
+    public function tambahKegiatan()
+    {
+        return view('admin/pages/kegiatan/tambahkegiatan', [
+            "title" => "Tambah Kegiatan"
+        ]);
+    }
+    public function saveKegiatan(Request $request)
+    {
+        DB::table('kegiatans')->insert([
+            'kegiatan' => $request->kegiatan,
+            'keterangan' => $request->keterangan,
+            'created_at' => date("Y-m-d H:i:s", strtotime('now')),
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
+        $kegiatans = DB::table('kegiatans')->get();
+        return redirect('admin/kegiatan');
+    }
     public function updateKegiatan($id)
     {
         $kegiatans = DB::table('kegiatans')->where('id', $id)->get();
@@ -144,6 +161,13 @@ class AdminController extends Controller
         ]);
         $kegiatans = DB::table('kegiatans')->get();
         return redirect('admin/kegiatan');
+    }
+
+    public function tambahSub()
+    {
+        return view('admin/pages/kegiatan/tambahsub', [
+            "title" => "Tambah SubKegiatan"
+        ]);
     }
 
     public function deleteKegiatan($id)

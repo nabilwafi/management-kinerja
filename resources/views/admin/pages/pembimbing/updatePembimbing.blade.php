@@ -3,7 +3,7 @@
 <h1 class="app-page-title">Update Pembimbing</h1>
 
 @foreach ($pembimbing as $pmbng)
-    
+
 <form action="/admin/pembimbing/update/baru" method="post">
     @csrf
     <div class="app-card app-card-settings shadow-sm p-4">

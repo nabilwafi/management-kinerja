@@ -44,7 +44,6 @@
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->
-               
             </div><!--//app-card-body-->		
         </div><!--//app-card-->
         <nav class="app-pagination">

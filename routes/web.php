@@ -40,17 +40,20 @@ Route::controller(AdminController::class)->group(function () {
     //admin pembimbing
     Route::get('/admin/pembimbing', 'dataPembimbing');
     Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');
+    Route::post('/admin/pembimbing/tambah/baru', 'savePembimbing');
     Route::get('/admin/pembimbing/update/{id}', 'updatePembimbing');
     Route::post('/admin/pembimbing/update/baru', 'saveUpdatePembimbing');
     Route::get('/admin/pembimbing/delete/{id}', 'deletePembimbing');
     //admin kegiatan
     Route::get('/admin/kegiatan', 'dataKegiatan');
+    Route::get('/admin/kegiatan/tambah', 'tambahKegiatan');
+    Route::post('/admin/kegiatan/tambah/baru', 'saveKegiatan');
     Route::get('/admin/kegiatan/update/{id}', 'updateKegiatan');
     Route::post('/admin/kegiatan/update/baru', 'saveUpdateKegiatan');
     Route::get('/admin/kegiatan/delete/{id}', 'deleteKegiatan');
+    Route::get('/admin/kegiatan/addSub', 'tambahSub');
+    Route::post('/admin/kegiatan/tambah/baru', 'saveKegiatan');
 });
-//admin tambah pembimbing
-Route::resource('/admin/pembimbing/tambah/baru', AdminController::class);
 
 // Peserta
 Route::controller(PesertaController::class)->group(function () {
