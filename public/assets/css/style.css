@@ -16,4 +16,8 @@
 .list-activities::-webkit-scrollbar {
   display: none;
 }
+
+.ck-editor__editable[role="textbox"] {
+  min-height: 250px;
+}
 /* End of Index Peserta */

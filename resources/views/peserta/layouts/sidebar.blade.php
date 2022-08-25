@@ -25,7 +25,7 @@
 
                 <li class="nav-item">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                    <a class="nav-link {{ $link == 'kegiatan' ? "active" : "" }}" href="/peserta/kegiatanku/1">
+                    <a class="nav-link {{ $link == 'kegiatan' ? "active" : "" }}" href="/peserta/kegiatanku/{{ $kinerja->id_peserta }}">
                         <span class="nav-icon">
                             <i class='bx bx-id-card bx-sm'></i>
                         </span>
@@ -49,7 +49,7 @@
 
                 <li class="nav-item">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                    <a class="nav-link {{ $link == 'h_kegiatan' ? "active" : "" }}" href="/peserta/history-kegiatan/1">
+                    <a class="nav-link {{ $link == 'h_kegiatan' ? "active" : "" }}" href="/peserta/history-kegiatan/{{ $kinerja->id_peserta }}">
                         <span class="nav-icon">
                             <i class='bx bx-history bx-sm' ></i>
                         </span>

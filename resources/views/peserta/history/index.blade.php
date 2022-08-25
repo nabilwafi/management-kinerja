@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">No Kegiatan</th>
+                <th scope="col">Nama Peserta</th>
                 <th scope="col">Judul Kegiatan</th>
                 <th scope="col">Sub Kegiatan</th>
                 <th scope="col">Keterangan</th>
@@ -16,19 +16,31 @@
             </tr>
         </thead>
         <tbody>
-          @for ($i = 0; $i < 5; $i++)
-          <tr>
-              <th scope="row">1</th>
-              <td>125192052</td>
-              <td>Membuat Aplikasi Management Kinerja Anak Magang</td>
-              <td>Design</td>
-              <td>Merancang design yang user friendly</td>
-              <td>8 Jam</td>
-              <td>
-                <span class="badge bg-success">Selesai</span>
-              </td>
-          </tr>
-          @endfor
+            @foreach($kinerjas as $knj)
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ $knj->nama_peserta }}</td>
+                    <td>{{ $knj->kegiatan }}</td>
+                    <td>{{ $knj->sub_kegiatan }}</td>
+                    <td>{!! Str::limit(strip_tags($knj->keterangan), $limit = 50, $end = '...') !!}</td>
+                    <td>
+                        @if ($knj->hours != 00)
+                            {{ $knj->hours }} Jam
+                        @endif
+                        @if($knj->minutes != 00)
+                            {{ $knj->minutes }} Menit
+                        @endif
+                        @if($knj->seconds != 00)
+                            {{ $knj->seconds }} Detik
+                        @endif
+                    </td>
+                    <td>
+                        @if($knj->status_kegiatan)
+                        <span class="badge bg-success">{{ $knj->status_kegiatan }}</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
