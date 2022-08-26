@@ -16,27 +16,27 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($kinerjas as $knj)
+            @foreach($detail_kinerjas as $dk)
                 <tr>
                     <th scope="row">1</th>
-                    <td>{{ $knj->nama_peserta }}</td>
-                    <td>{{ $knj->kegiatan }}</td>
-                    <td>{{ $knj->sub_kegiatan }}</td>
-                    <td>{!! Str::limit(strip_tags($knj->keterangan), $limit = 50, $end = '...') !!}</td>
+                    <td>{{ $dk->nama_peserta }}</td>
+                    <td>{{ $dk->kegiatan }}</td>
+                    <td>{{ $dk->sub_kegiatan }}</td>
+                    <td>{!! Str::limit(strip_tags($dk->keterangan), $limit = 50, $end = '...') !!}</td>
                     <td>
-                        @if ($knj->hours != 00)
-                            {{ $knj->hours }} Jam
+                        @if ($dk->hours != 00)
+                            {{ $dk->hours }} Jam
                         @endif
-                        @if($knj->minutes != 00)
-                            {{ $knj->minutes }} Menit
+                        @if($dk->minutes != 00)
+                            {{ $dk->minutes }} Menit
                         @endif
-                        @if($knj->seconds != 00)
-                            {{ $knj->seconds }} Detik
+                        @if($dk->seconds != 00)
+                            {{ $dk->seconds }} Detik
                         @endif
                     </td>
                     <td>
-                        @if($knj->status_kegiatan)
-                        <span class="badge bg-success">{{ $knj->status_kegiatan }}</span>
+                        @if($dk->status_kegiatan)
+                        <span class="badge bg-success">{{ $dk->status_kegiatan }}</span>
                         @endif
                     </td>
                 </tr>

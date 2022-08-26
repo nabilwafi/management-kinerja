@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Detail_Kinerjas;
 use App\Models\Kinerjas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,9 +10,11 @@ use Illuminate\Support\Facades\DB;
 class PesertaController extends Controller
 {
     protected $kinerjas;
+    protected $detail_kinerjas;
     public function __construct()
     {
         $this->kinerjas = new Kinerjas();
+        $this->detail_kinerjas = new Detail_Kinerjas();
     }
 
     public function index($peserta = 1)
@@ -20,11 +23,9 @@ class PesertaController extends Controller
         $data = [
             'link' => 'overview',
             'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
-            'kinerja' => $this->kinerjas->kinerjaFilterByPeserta($peserta)->first(),
+            'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($peserta)->first(),
             'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($peserta)->get()
         ];
-
-        // dd($data['kinerja']);
 
         return view('peserta/index', $data);
     }
@@ -32,13 +33,12 @@ class PesertaController extends Controller
     public function updateSubKegiatanAndStatusKegiatan(Request $request, $id_kinerja, $id_peserta)
     {
         if($request->has('sub_kegiatan_diambil')) {
-            $kinerja = $this->kinerjas->find($id_kinerja);
-            
-            $kinerja->mulai_kinerja = date('Y-m-d H:i:s');
-            $kinerja->status_kegiatan = 'melakukan aktivitas';
-            $kinerja->sub_kegiatan_diambil = $request->sub_kegiatan_diambil;
+            $detail_kinerja = new Detail_Kinerjas();
+            $detail_kinerja->id_kinerja = $id_kinerja;
+            $detail_kinerja->mulai_kinerja = date('Y-m-d H:i:s');
+            $detail_kinerja->sub_kegiatan_diambil = $request->sub_kegiatan_diambil;
 
-            if($kinerja->save()) {
+            if($detail_kinerja->save()) {
                 return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
             }else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
@@ -52,13 +52,12 @@ class PesertaController extends Controller
     public function updateStatusKegiatanAndSelesaiKinerja(Request $request, $id_kinerja, $id_peserta)
     {
         if($request->has('keterangan')) {
-            $kinerja = $this->kinerjas->find($id_kinerja);
+            $detail_kinerja = Detail_Kinerjas::where('id_kinerja', $id_kinerja)->latest()->first();
+            $detail_kinerja->selesai_kinerja = date('Y-m-d H:i:s');
+            $detail_kinerja->status_kegiatan = 'selesai';
+            $detail_kinerja->keterangan = $request->keterangan;
 
-            $kinerja->selesai_kinerja = date('Y-m-d H:i:s');
-            $kinerja->status_kegiatan = 'selesai';
-            $kinerja->keterangan = $request->keterangan;
-
-            if($kinerja->save()) {
+            if($detail_kinerja->save()) {
                 return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
             }else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
@@ -73,8 +72,11 @@ class PesertaController extends Controller
     {
         $data = [
             'link' => 'kegiatan',
-            'kinerja' => $this->kinerjas->kinerjaFilterByPeserta($peserta)->first(),
+            'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
+            'kegiatan' => $this->kinerjas->getKinerjaFilterByStatusKegiatanMelakukanAktivitas()->first()
         ];
+
+        // dd($data['kegiatan']);
 
         return view('peserta/kegiatanku/index', $data);
     }
@@ -92,8 +94,8 @@ class PesertaController extends Controller
     {
         $data = [
             'link' => 'h_kegiatan',
-            'kinerja' => $this->kinerjas->kinerjaFilterByPeserta($peserta)->first(),
-            'kinerjas' => $this->kinerjas->kinerjasWithStatusSelesai($peserta)->get(['pesertas.nama_peserta', 'kegiatans.kegiatan', 'detail_kinerjas.keterangan', 'sub_kegiatans.sub_kegiatan', 'detail_kinerjas.status_kegiatan', DB::raw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja, detail_kinerjas.mulai_kinerja), "%H") as hours'), DB::raw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja, detail_kinerjas.mulai_kinerja), "%i") as minutes'), DB::raw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja, detail_kinerjas.mulai_kinerja), "%s") as seconds')])
+            'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
+            'detail_kinerjas' => $this->detail_kinerjas->detailKinerjaByIdPeserta($peserta)->get()
         ];
 
         return view('peserta/history/index', $data);
