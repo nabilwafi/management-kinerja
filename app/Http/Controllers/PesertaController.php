@@ -133,7 +133,7 @@ class PesertaController extends Controller
     }
 
 
-    public function absen(Request $request, $id, $id_peserta){
+    public function absen(Request $request, $id){
         if ($request->isMethod('post')){
             $data = Absensis::where('id', $id)->first();
             $data->jam = date('H:i:s');
