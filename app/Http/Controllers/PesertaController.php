@@ -36,7 +36,7 @@ class PesertaController extends Controller
         'link' => 'absensi'
         ];
         // $dataAbsensiDetail = Absensis::all();
-        $dataAbsensiDetail = Absensis::where('id_peserta',Auth::guard('peserta')->user()->id)->get();
+        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get();
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
         return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
@@ -124,7 +124,7 @@ class PesertaController extends Controller
         $data = [
             'link' => 'absensi'
             ];
-        $ip = $request->ip();
+        // $ip = $request->ip();
         // $lokasi = Location::get($ip);
         $Absensi = Absensis::where('id',$id)->first();
         $Absensi = json_decode(json_encode($Absensi),true);
@@ -133,21 +133,19 @@ class PesertaController extends Controller
     }
 
 
-    public function absen(Request $request){
+    public function absen(Request $request, $id, $id_peserta){
         if ($request->isMethod('post')){
-            $data = $request->all();
+            $data = Absensis::where('id', $id)->first();
+            $data->jam = date('H:i:s');
+            $data->status = "menunggu verifikasi";
+            $data->keterangan = $request->keterangan;
 
-            $rules = [
-                'jam' => 'required',
-                'lokasi' => 'required',
+            // Absensis::where('id', Auth::guard('peserta')->user()->id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan']]);
+        }
+        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get();
+        $data = [
+            'link' => 'absensi'
             ];
-
-            $this->validate($request, $rules);
-
-            Absensis::where('id', Auth::guard('peserta')->user()->id)->update(['jam'=>$data['jam'],'lokasi'=>$data['lokasi']]);
-            return redirect()->back()->with('success', 'Berhasil melakukan Absensi! Silahkan tunggu Validasi Pembimbing');
-    }
-    $absenDetails = Absensis::where('id', Auth::guard('peserta')->user()->id)->first()->toArray();
-    return view ('peserta/absensi/index')->with(compact('absenDetails'));
+        return view ('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
     }
 }

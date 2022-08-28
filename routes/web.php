@@ -52,7 +52,7 @@ Route::controller(PesertaController::class)->group(function() {
 
         //Melakukan Absensi
         Route::get('/absensi/view-absen/{id}', 'viewAbsen');
-        // Route::match(['get','match'],'absen','absen');
+        Route::post('/absen/{id}/{id_peserta}', 'absen');
 
     });
 });

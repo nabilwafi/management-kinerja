@@ -9,7 +9,7 @@
                 {{-- <p class="card-description">
                   Update Admin Password
                 </p> --}}
-                <form class="forms-sample">
+                <form class="forms-sample"  method="post" action="{{ url('peserta/absen') }}">
                     @csrf
                     <div class="form-group">
                         <label class="m-1">ID Peserta</label>
@@ -22,21 +22,15 @@
                   <div class="form-group">
                     <label class="m-1">Tanggal Pertemuan</label>
                     <input type="date" class="form-control" value="{{ $Absensi['tanggal_pertemuan'] }}" readonly>
-                  </div>
-                    <input name="status" hidden value="menunggu verifikasi"
-                  <div class="form-group">
-                    <label class="m-1">Jam</label>
-                    <input type="time" class="form-control" value="">
-                  </div>
-                  <div class="form-group">
+                  {{-- <div class="form-group">
                     <label class="m-1">Lokasi</label>
-                    @if ($lokasi)
+                    {{-- @if ($lokasi)
                     <input type="text" class="form-control" value="{{ $lokasi->zipCode }}" readonly>
-                    @endif
-                  </div>
+                    @endif --}}
+                  </div> 
                   <div class="form-group">
                     <label class="m-1">Keterangan</label>
-                    <select name="status" id="status" class="form-control">
+                    <select name="keterangan" id="keterangan" class="form-control">
                       <option value="Hadir">Hadir</option>
                       <option value="Tidak Hadir">Sakit</option>
                       <option value="Tidak Hadir">Izin</option>
