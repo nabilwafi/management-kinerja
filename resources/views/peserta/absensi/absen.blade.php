@@ -9,8 +9,9 @@
                 {{-- <p class="card-description">
                   Update Admin Password
                 </p> --}}
-                <form class="forms-sample"  method="post" action="{{ url('peserta/absen') }}">
+                <form class="forms-sample"  method="post" action="{{ url('peserta/absen/{{ $Absensi->id }}/{{ $Absensi->id_peserta }}') }}">
                     @csrf
+                    @method('PATCH')
                     <div class="form-group">
                         <label class="m-1">ID Peserta</label>
                         <input type="text" class="form-control" value="{{ $Absensi['id_peserta'] }}" readonly>
