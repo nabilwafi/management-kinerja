@@ -23,7 +23,7 @@
                     <label class="m-1">Tanggal Pertemuan</label>
                     <input type="date" class="form-control" value="{{ $Absensi['tanggal_pertemuan'] }}" readonly>
                   </div>
-                    <input name="status" hidden value="menunggu verifikasi">
+                    <input name="status" hidden value="menunggu verifikasi"
                   <div class="form-group">
                     <label class="m-1">Jam</label>
                     <input type="time" class="form-control" value="">

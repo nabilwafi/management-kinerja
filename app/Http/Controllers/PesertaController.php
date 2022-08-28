@@ -117,18 +117,21 @@ class PesertaController extends Controller
         
     }
 
+    // public function updateJam()
+
     public function viewAbsen(Request $request, $id){
 
         $data = [
             'link' => 'absensi'
             ];
         $ip = $request->ip();
-        $lokasi = Location::get($ip);
+        // $lokasi = Location::get($ip);
         $Absensi = Absensis::where('id',$id)->first();
         $Absensi = json_decode(json_encode($Absensi),true);
         // dd($ip);
-        return view('peserta.absensi.absen', $data)->with(compact('Absensi','lokasi'));
+        return view('peserta.absensi.absen', $data)->with(compact('Absensi'));
     }
+
 
     public function absen(Request $request){
         if ($request->isMethod('post')){
