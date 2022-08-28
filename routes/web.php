@@ -24,10 +24,6 @@ Route::get('/form/register', function() {
     return view('form/register');
 });
 
-//Percobaan
-
-
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -45,11 +41,19 @@ Route::controller(AdminController::class)->group(function () {
 // Peserta
 Route::controller(PesertaController::class)->group(function() {
     Route::prefix('peserta')->group(function () {
+        //Login Route
+        Route::match(['get','post'],'login','login');
+        Route::match(['get','post'],'register','register');
         Route::get('/', 'index');
         Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num');
         Route::get('/absensi/{num}', 'dataAbsensi')->whereNumber('num');
         Route::get('/history-kegiatan/{num}', 'historyKegiatan')->whereNumber('num');
         Route::get('/detail-kegiatan/{num}', 'detailKegiatan')->whereNumber('num');
+
+        //Melakukan Absensi
+        Route::get('/absensi/view-absen/{id}', 'viewAbsen');
+        // Route::match(['get','match'],'absen','absen');
+
     });
 });
 

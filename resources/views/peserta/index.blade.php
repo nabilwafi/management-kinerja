@@ -4,6 +4,7 @@
 <div class="container-xl relative">
     <div class="row w-100 align-items-center">
         <div class="col-md-9 border-3 overflow-scroll list-activities mb-5">
+            
             <h1 class="fs-2 mb-3">List Kegiatan</h1>
             @for ($i = 0; $i < 10; $i++)
             <div class="card mb-3">
@@ -28,7 +29,7 @@
                 <img src="{{ asset('/template/assets/images/users/user-1.jpg') }}"
                     class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Muhammad Nabil Wafi</h5>
+                    <h5 class="card-title">{{ Auth::guard('peserta')->user()->nama_peserta }}</h5>
                     <hr />
 
                     <ul class="list-group list-group-flush">
@@ -45,7 +46,7 @@
                                 <span class="fw-bold">Instansi Pendidikan:</span>
                             </div>
                             <div class="col-md-6">
-                                <span>Universitas Komputer Indonesia</span>
+                                <span>{{ Auth::guard('peserta')->user()->instansi_pendidikan }}</span>
                             </div>
                         </li>
                         <li class="row mb-4">
@@ -53,7 +54,7 @@
                                 <span class="fw-bold">Jurusan:</span>
                             </div>
                             <div class="col-md-6">
-                                <span>Sistem Informasi</span>
+                                <span>{{ Auth::guard('peserta')->user()->jurusan }}</span>
                             </div>
                         </li>
                         <li class="row mb-4">
@@ -61,7 +62,7 @@
                                 <span class="fw-bold">Nama Pembimbing:</span>
                             </div>
                             <div class="col-md-6">
-                                <span>Rizki Nur Zhifar</span>
+                                <span>{{ Auth::guard('peserta')->user()->id_pembimbing }}</span>
                             </div>
                         </li>
                         <li class="row mb-4">

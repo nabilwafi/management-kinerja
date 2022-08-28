@@ -14,21 +14,25 @@
                 <th scope="col">Lokasi</th>
                 <th scope="col">Status</th>
                 <th scope="col">Keterangan</th>
+                <th scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @for($i = 0; $i < 5; $i++)
+            @foreach ($dataAbsensiDetail as $absen)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>12-08-2022</td>
-                    <td>15204</td>
-                    <td>Rizki Nur Zhifar</td>
-                    <td>08:00:00</td>
-                    <td>Dinas Komunikasi, Informasi dan Statistik</td>
-                    <td>Terverifikasi</td>
-                    <td>Memabahas mengenai project</td>
+                    <td scope="row" >{{ $absen['id'] }}</td>
+                    <td>{{ $absen['tanggal_pertemuan'] }}</td>
+                    <td>{{ $absen['no_pertemuan']}}</td>
+                    <td>Pembimbing</td>
+                    <td>{{ $absen['jam'] }}</td>
+                    <td>{{ $absen['lokasi'] }}</td>
+                    <td>{{ $absen['status'] }}</td>
+                    <td>{{ $absen['keterangan'] }}</td>
+                    @if ($absen['tanggal_pertemuan'] == date("Y-m-d") && $absen['status'] == 'belum terverifikasi')
+                    <td><a class="btn btn-info" href="{{ url('peserta/absensi/view-absen/'.$absen['id'])}}">Absen</a></td>
+                    @endif
                 </tr>
-            @endfor
+            @endforeach
         </tbody>
     </table>
 </div>

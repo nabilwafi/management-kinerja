@@ -27,28 +27,33 @@
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{ asset('template/assets/images/app-logo.svg') }}" alt="logo"></a></div>
 					<h2 class="auth-heading text-center mb-4">Pendaftaran Peserta</h2>					
-	
+					@if($errors->any())
+					@foreach($errors->all() as $err)
+					<p class="alert alert-danger">{{ $err }}</p>
+					@endforeach
+					@endif
 					<div class="auth-form-container text-start mx-auto">
-						<form class="auth-form auth-signup-form" action="{{ route('') }}" method="post">         
+						<form class="auth-form auth-signup-form" action="{{ url('peserta/register') }}" method="post">  
+							@csrf       
 							<div class="email mb-3">
-								<label class="sr-only" for="nama">Nama Lengkap</label>
-								<input id="nama" name="nama" type="text" class="form-control signup-name" placeholder="Nama Lengkap" required="required">
+								<label class="sr-only" for="nama_peserta">Nama Lengkap</label>
+								<input id="nama_peserta" name="nama_peserta" type="text" class="form-control signup-name" placeholder="Nama Lengkap">
 							</div>
 							<div class="email mb-3">
 								<label class="sr-only" for="instansi">Instansi</label>
-								<input id="instansi" name="instansi" type="text" class="form-control signup-name" placeholder="Instansi" required="required">
+								<input id="instansi" name="instansi" type="text" class="form-control signup-name" placeholder="Instansi">
 							</div>
 							<div class="email mb-3">
 								<label class="sr-only" for ="jurusan">Jurusan</label>
-								<input id="jurusan" name="jurusan" type="text" class="form-control signup-name" placeholder="Jurusan" required="required">
+								<input id="jurusan" name="jurusan" type="text" class="form-control signup-name" placeholder="Jurusan">
 							</div>							
 							<div class="email mb-3">
 								<label class="sr-only" for="email">Email</label>
-								<input id="email" name="email" type="email" class="form-control signup-email" placeholder="Email" required="required">
+								<input id="email" name="email" type="email" class="form-control signup-email" placeholder="Email" >
 							</div>
 							<div class="password mb-3"for="password">
 								<label class="sr-only">Password</label>
-								<input id="password" name="password" type="password" class="form-control signup-password" placeholder="Password" required="required">
+								<input id="password" name="password" type="password" class="form-control signup-password" placeholder="Password">
 							</div>
 
 							

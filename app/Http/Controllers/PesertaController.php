@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensis;
+use App\Models\Pesertas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Stevebauman\Location\Facades\Location;
+use PDO;
 
 class PesertaController extends Controller
 {
@@ -29,8 +35,11 @@ class PesertaController extends Controller
         $data = [
         'link' => 'absensi'
         ];
+        // $dataAbsensiDetail = Absensis::all();
+        $dataAbsensiDetail = Absensis::where('id_peserta',Auth::guard('peserta')->user()->id)->get();
 
-        return view('peserta/absensi/index', $data);
+            // echo "<pre>"; print_r($dataAbsensiDetail); die;
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
     }
 
     public function historyKegiatan()
@@ -49,5 +58,93 @@ class PesertaController extends Controller
         ];
 
         return view('peserta/detail_kegiatan/index', $data);
+    }
+
+    public function login(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+            // dd($data);
+            // die;
+
+            $rules = [
+                'email' => 'required|email|max:255',
+                'password' => 'required',
+            ];
+
+            $customMessages = [
+                'email.required' => 'Email is Required',
+                'email.email' => 'Valid Email is Required',
+                'password.required' => 'Password is Required',
+            ];
+
+            $this->validate($request, $rules, $customMessages);
+
+            if(Auth::guard('peserta')->attempt(['email'=>$data['email'], 'password'=>$data['password']])){
+            return redirect('peserta/');
+            }else{
+            return redirect()->back()->with('error_message','Invalid Email or Password');
+            }
+        }
+    return view('form.login');
+    }   
+
+    public function logout(){
+        Auth::guard('peserta')->logout();
+        return redirect('peserta/login');
+    }
+
+    public function register(Request $request){
+        if($request->isMethod('post')){
+            $request->validate([
+                'nama_peserta' => 'required',
+                'email' => 'required|unique:pesertas|email',
+                'password' => 'required',
+                'instansi' =>'required',
+                'jurusan'=>'required',
+            ]);
+
+            $peserta = new Pesertas([
+                'nama_peserta' => $request->nama_peserta,
+                'email' => $request->email,
+                'instansi_pendidikan' => $request->instansi,
+                'jurusan' => $request->jurusan,
+                'password'=> Hash::make($request->password),
+            ]);
+            $peserta->save();
+            
+            return redirect('')->with('success', 'Registration Success, Please Login!');
+        }
+        
+    }
+
+    public function viewAbsen(Request $request, $id){
+
+        $data = [
+            'link' => 'absensi'
+            ];
+        $ip = $request->ip();
+        $lokasi = Location::get($ip);
+        $Absensi = Absensis::where('id',$id)->first();
+        $Absensi = json_decode(json_encode($Absensi),true);
+        // dd($ip);
+        return view('peserta.absensi.absen', $data)->with(compact('Absensi','lokasi'));
+    }
+
+    public function absen(Request $request){
+        if ($request->isMethod('post')){
+            $data = $request->all();
+
+            $rules = [
+                'jam' => 'required',
+                'lokasi' => 'required',
+            ];
+
+            $this->validate($request, $rules);
+
+            Absensis::where('id', Auth::guard('peserta')->user()->id)->update(['jam'=>$data['jam'],'lokasi'=>$data['lokasi']]);
+            return redirect()->back()->with('success', 'Berhasil melakukan Absensi! Silahkan tunggu Validasi Pembimbing');
+    }
+    $absenDetails = Absensis::where('id', Auth::guard('peserta')->user()->id)->first()->toArray();
+    return view ('peserta/absensi/index')->with(compact('absenDetails'));
     }
 }

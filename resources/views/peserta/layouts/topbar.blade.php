@@ -21,7 +21,7 @@
                                 alt="user profile">
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                            <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                            <li><a class="dropdown-item" href="{{ url('peserta/login') }}">Log Out</a></li>
                         </ul>
                     </div>
                     <!--//app-user-dropdown-->
