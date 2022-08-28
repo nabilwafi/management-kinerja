@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <div class="card">
                 <img src="{{ asset('/assets/images/'.$peserta->gambar_peserta) }}"
                     class="card-img-top" alt="...">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 

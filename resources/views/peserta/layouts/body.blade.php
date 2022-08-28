@@ -5,17 +5,9 @@
     @include('peserta/layouts/head')
 </head>
 
-<body class="app">
+<body class="bg-light">
 	{{-- Header --}}
-    <header class="app-header fixed-top">
-        {{-- Tobar --}}
-        @include('peserta/layouts/topbar')
-        {{-- End Of Topbar --}}
-
-        {{-- Sidebar --}}
-        @include('peserta/layouts/sidebar')
-        {{-- End Of Sidebar --}}
-    </header>
+    @include('peserta/layouts/topbar')
 	{{-- End of Header --}}
 
     <div class="app-wrapper">

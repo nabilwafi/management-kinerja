@@ -1,10 +1,6 @@
 <!-- Javascript -->
-<script src={{ asset("template/assets/plugins/popper.min.js")}}></script>
-<script src={{ asset("template/assets/plugins/bootstrap/js/bootstrap.min.js")}}></script>
-
-<!-- Charts JS -->
-<script src={{ asset("template/assets/plugins/chart.js/chart.min.js")}}></script>
-<script src={{ asset("template/assets/js/index-charts.js")}}></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 
 <!-- Page Specific JS -->
 <script src={{ asset("template/assets/js/app.js")}}></script>

@@ -4,20 +4,65 @@
   box-sizing: border-box;
 }
 
-/* Index Peserta */
-.card-number {
-  font-size: 1.2rem;
+html {
+  scroll-behavior: smooth;
 }
 
-.list-activities {
-  height: 80vh;
+/* Header */
+.header-section {
+  position: relative;
 }
 
-.list-activities::-webkit-scrollbar {
+.nav-link {
+  padding: 0;
+}
+
+.nav-name {
+  font-size: .6rem;
+  margin: 0;
+}
+
+.nav-icon {
+  font-size: 1rem;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-mobile {
+  bottom: 0;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, .5);
+  position: fixed;
+}
+
+.nav-header {
+  background-color: white;
+}
+
+.nav-top-title {
+  font-size: 1.3rem;
+}
+
+.nav-list {
   display: none;
 }
+/* End of Header */
 
-.ck-editor__editable[role="textbox"] {
-  min-height: 250px;
+/* Queries */
+@media screen and (min-width: 768px) {
 }
-/* End of Index Peserta */
+
+@media screen and (min-width: 1024px) {
+  .nav-mobile {
+    display: none;
+  }
+
+  .nav-list {
+    display: block;
+  }
+}
+/* End of Queries */
