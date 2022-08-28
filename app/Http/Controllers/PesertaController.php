@@ -135,17 +135,21 @@ class PesertaController extends Controller
 
     public function absen(Request $request, $id){
         if ($request->isMethod('post')){
-            $data = Absensis::where('id', $id)->first();
-            $data->jam = date('H:i:s');
-            $data->status = "menunggu verifikasi";
-            $data->keterangan = $request->keterangan;
+            $data = $request->all();
 
-            // Absensis::where('id', Auth::guard('peserta')->user()->id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan']]);
+            $rules = [
+                
+            ];
+
+            $this->validate($request, $rules);
+
+            Absensis::where('id', $id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan']]);
         }
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get();
         $data = [
             'link' => 'absensi'
+
             ];
-        return view ('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
+        return view ('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail'));
     }
 }
