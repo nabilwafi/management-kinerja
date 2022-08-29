@@ -51,7 +51,7 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/kegiatan/update/{id}', 'updateKegiatan');
     Route::post('/admin/kegiatan/update/baru', 'saveUpdateKegiatan');
     Route::get('/admin/kegiatan/delete/{id}', 'deleteKegiatan');
-    Route::get('/admin/kegiatan/addSub', 'tambahSub');
+    Route::get('/admin/kegiatan/addSub/{id}', 'tambahSub');
     Route::post('/admin/kegiatan/tambah/saveSub', 'saveSub');
     Route::post('/admin/kegiatan/tambah/baru', 'saveKegiatan');
 
@@ -67,7 +67,7 @@ Route::controller(PesertaController::class)->group(function () {
         Route::get('/', 'index')->name('home');
         Route::patch('{kinerja}/{peserta}', 'updateSubKegiatanAndStatusKegiatan')->whereNumber('kinerja')->whereNumber('peserta');
         Route::patch('update/{kinerja}/{peserta}', 'updateStatusKegiatanAndSelesaiKinerja')->whereNumber('kinerja')->whereNumber('peserta');
-        
+
         Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num')->name('kegiatanku');
 
         Route::get('/absensi/{num}', 'dataAbsensi')->whereNumber('num');

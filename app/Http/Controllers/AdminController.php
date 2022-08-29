@@ -163,10 +163,10 @@ class AdminController extends Controller
         return redirect('admin/kegiatan');
     }
 
-    public function tambahSub()
+    public function tambahSub($id)
     {
 
-        $kegiatans = DB::table('kegiatans')->get();
+        $kegiatans = DB::table('kegiatans')->where('kegiatans.id', '=', $id)->get('id');
         return view('admin/pages/kegiatan/tambahsub', [
             "title" => "Tambah SubKegiatan",
             "kegiatan" => $kegiatans
@@ -185,8 +185,6 @@ class AdminController extends Controller
                 ];
         };
         DB::table('sub_kegiatans')->insert($data);
-
-        $sub_kegiatans = DB::table('sub_kegiatans')->get();
         return redirect('admin/kegiatan');
     }
 

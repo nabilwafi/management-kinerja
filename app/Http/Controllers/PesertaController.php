@@ -31,26 +31,25 @@ class PesertaController extends Controller
 
     public function updateSubKegiatanAndStatusKegiatan(Request $request, $id_kinerja, $id_peserta)
     {
-        if($request->has('sub_kegiatan_diambil')) {
+        if ($request->has('sub_kegiatan_diambil')) {
             $detail_kinerja = new Detail_Kinerjas();
             $detail_kinerja->id_kinerja = $id_kinerja;
             $detail_kinerja->mulai_kinerja = date('Y-m-d H:i:s');
             $detail_kinerja->sub_kegiatan_diambil = $request->sub_kegiatan_diambil;
 
-            if($detail_kinerja->save()) {
+            if ($detail_kinerja->save()) {
                 return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
-            }else {
+            } else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
             }
-
-        }else {
+        } else {
             return redirect()->back()->withInput()->with('error', 'Need Input Sub Category');
         }
     }
 
     public function updateStatusKegiatanAndSelesaiKinerja(Request $request, $id_kinerja, $id_peserta)
     {
-        if($request->has('keterangan')) {
+        if ($request->has('keterangan')) {
             $detail_kinerja = Detail_Kinerjas::where('id_kinerja', $id_kinerja)->latest()->first();
             $detail_kinerja->selesai_kinerja = date('Y-m-d H:i:s');
             $detail_kinerja->status_kegiatan = 'selesai';
@@ -58,20 +57,19 @@ class PesertaController extends Controller
 
             // dd($id_kinerja);
 
-            if($detail_kinerja->save()) {
+            if ($detail_kinerja->save()) {
                 return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
-            }else {
+            } else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
             }
-
-        }else {
+        } else {
             return redirect()->back()->withInput()->with('error', 'Need Input Sub Category');
         }
     }
 
     public function kegiatanku($peserta)
     {
-        
+
         $data = [
             'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
             'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
@@ -86,7 +84,7 @@ class PesertaController extends Controller
     public function dataAbsensi()
     {
         $data = [
-        'link' => 'absensi',
+            'link' => 'absensi',
         ];
 
         return view('peserta/absensi/index', $data);
