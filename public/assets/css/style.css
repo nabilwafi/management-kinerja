@@ -4,16 +4,171 @@
   box-sizing: border-box;
 }
 
-/* Index Peserta */
-.card-number {
-  font-size: 1.2rem;
+html {
+  scroll-behavior: smooth;
 }
 
-.list-activities {
-  height: 80vh;
+/* Header */
+.header-section {
+  position: relative;
 }
 
-.list-activities::-webkit-scrollbar {
+.nav-link {
+  padding: 0;
+}
+
+.nav-name {
+  font-size: .6rem;
+  margin: 0;
+}
+
+.nav-icon {
+  font-size: 1rem;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-mobile {
+  bottom: 0;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, .5);
+  position: fixed;
+}
+
+.nav-header {
+  background-color: white;
+}
+
+.nav-top-title {
+  font-size: 1.3rem;
+}
+
+.nav-list {
   display: none;
 }
-/* End of Index Peserta */
+
+.peserta-page-mobile, .peserta-page {
+  min-height: 80vh;
+}
+
+.peserta-page-mobile .card-title {
+  font-size: 1rem;
+}
+
+.peserta-page-mobile .card-text {
+  text-align: justify;
+}
+
+.form-kegiatan {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-kegiatan .btn-primary {
+  margin-top: 1rem;
+}
+
+.card-name {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.peserta-page-mobile .card-text {
+  font-size: .8rem;
+}
+
+.peserta-page,
+.kegiatanku-page {
+  display: none;
+}
+
+.peserta-content .list-group-item {
+  padding-left: 0;
+}
+
+.peserta-page .form-select {
+  float: left;
+  width: 250px;
+}
+
+.list-title {
+  font-size: .8rem;
+  color: rgb(180, 180, 180);
+}
+
+.modal-content .form-control {
+  height: 100%;
+}
+/* End of Header */
+
+
+/* Kegiatanku */
+.kegiatanku-page .card-title {
+  font-size: 1rem;
+}
+
+.kegiatanku-page .badge-subtitle {
+  display: none;
+}
+
+.kegiatanku-page .card-subtitle {
+  font-size: .8rem;
+}
+
+.kegiatanku-page .card-text {
+  font-size: .8rem;
+}
+/* End of Kegiatanku */
+
+/* Queries */
+@media screen and (min-width: 768px) {
+}
+
+@media screen and (min-width: 1024px) {
+  .nav-mobile {
+    display: none;
+  }
+
+  .nav-list {
+    display: block;
+  }
+
+  .peserta-page-mobile,
+  .kegiatanku-page-mobile {
+    display: none;
+  }
+
+  .peserta-page,
+  .kegiatanku-page {
+    display: block;
+  }
+
+  .button-web .btn-danger {
+    width: 100px;
+  }
+
+  .kegiatanku-page .card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .kegiatanku-page .badge-subtitle-web {
+    display: block;
+    padding: 8px;
+  }
+
+  .kegiatanku-page .card-subtitle {
+    display: none;
+  }
+
+  .card-kegiatan {
+    height: 100%;
+  }
+}
+/* End of Queries */

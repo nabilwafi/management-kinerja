@@ -1,12 +1,4 @@
 <!-- Javascript -->
-<script src={{ asset("template/assets/plugins/popper.min.js")}}></script>
-<script src={{ asset("template/assets/plugins/bootstrap/js/bootstrap.min.js")}}></script>
-
-<!-- Charts JS -->
-<script src={{ asset("template/assets/plugins/chart.js/chart.min.js")}}></script>
-<script src={{ asset("template/assets/js/index-charts.js")}}></script>
-
-<!-- Page Specific JS -->
-<script src={{ asset("template/assets/js/app.js")}}></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 
 @yield('script')

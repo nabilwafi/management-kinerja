@@ -1,18 +1,13 @@
 <!-- Meta -->
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{-- BOOTSTRAP --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-<meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-<meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-<link rel="shortcut icon" href="favicon.ico"> 
+{{-- ICONS --}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-<!-- FontAwesome JS-->
-<script defer src={{ asset("/template/assets/plugins/fontawesome/js/all.min.js") }}></script>
-
-<!-- App CSS -->  
-<link id="theme-style" rel="stylesheet" href={{ asset('/template/assets/css/portal.css') }}>
-<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+{{-- MY CSS --}}
 <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
 
-@yield('head');
+@yield('head')
