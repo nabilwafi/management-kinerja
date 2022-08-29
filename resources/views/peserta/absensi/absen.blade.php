@@ -25,9 +25,10 @@
                   </div>
                   <div class="form-group">
                       <label class="m-1">Lokasi</label>
-                      <button type="button" class="btn btn-warning" onclick="getLocation()"> Cek Lokasi </button>
-                      {{-- <input type="text" class="form-control" id="lokasi" name="lokasi" readonly> --}}
+                      
+                      {{-- <input type="text" class="form-control" id="lokasi" name="lokasi"> --}}
                       <p id="lokasi" class="form-control" name="lokasi"></p>
+                      <button type="button" class="btn btn-warning" onclick="getLocation()"> Cek Lokasi </button>
                   </div>
                   <div class="form-group">
                     <label class="m-1">Keterangan</label>

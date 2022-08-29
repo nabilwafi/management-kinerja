@@ -30,5 +30,9 @@ class Pesertas extends Authenticatable
         return $this->hasMany(Absensis::class);
     }
 
+    public function pembimbing(){
+        return $this->hasOne(Pembimbings::class);
+    }
+
     
 }

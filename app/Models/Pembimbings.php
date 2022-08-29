@@ -10,4 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Pembimbings extends Authenticatable
 {
     use HasFactory;
+
+    public function pesertas(){
+        $this->hasMany(Pesertas::class);
+    }
 }

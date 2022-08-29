@@ -70,10 +70,16 @@ Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing/index', 'index');
     Route::get('/pembimbing/peserta', 'dataPeserta');
     // Route::get('/pembimbing/pertemuan', 'dataPertemuan');
-    Route::get('/pembimbing/detailabsensi', 'dataDetailAbsensi');
-    Route::get('/pembimbing/tambahpertemuan', 'dataTambahPertemuan');
-    Route::get('/pembimbing/editabsensi', 'dataEditAbsensi');
-    Route::get('/pembimbing/detailkinerja', 'dataDetailKinerja');
+    Route::get('/pembimbing/detailabsensi/{id}', 'dataDetailAbsensi');
+    Route::get('pembimbing/detailabsensi/delete/{id}', 'deleteAbsensi');
+    Route::get('/pembimbing/tambahpertemuan/{id}', 'dataTambahPertemuan');
+    Route::post('/pembimbing/tambahpertemuan/baru/', 'tambahPertemuan');
+    Route::get('/pembimbing/editabsensi/{id}', 'dataEditAbsensi');
+    Route::post('/pembimbing/editabsensi/update', 'saveEditAbsensi');
+    Route::get('/pembimbing/detailkinerja/{id}', 'dataDetailKinerja');
+    Route::post('/pembimbing/detailkinerja/filtersubkegiatan/', 'filterSubb');
+    // Route::get('/pembimbing/filtersubkegiatan/{id}', 'filterSubKegiatan');
+    // Route::get('/pembimbing/detailabsensi/{id}')
 });
 
 

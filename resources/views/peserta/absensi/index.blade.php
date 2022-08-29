@@ -9,7 +9,7 @@
                
                 <th scope="col">Tanggal Pertemuan</th>
                 <th scope="col">No Pertemuan</th>
-                <th scope="col">Nama Pembimbing</th>
+                <th scope="col">ID Pembimbing</th>
                 <th scope="col">Jam</th>
                 <th scope="col">Lokasi</th>
                 <th scope="col">Status</th>
