@@ -21,7 +21,6 @@ class PesertaController extends Controller
     {
 
         $data = [
-            'link' => 'overview',
             'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
             'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($peserta)->first(),
             'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($peserta)->get()
@@ -57,6 +56,8 @@ class PesertaController extends Controller
             $detail_kinerja->status_kegiatan = 'selesai';
             $detail_kinerja->keterangan = $request->keterangan;
 
+            // dd($id_kinerja);
+
             if($detail_kinerja->save()) {
                 return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
             }else {
@@ -70,8 +71,9 @@ class PesertaController extends Controller
 
     public function kegiatanku($peserta)
     {
+        
         $data = [
-            'link' => 'kegiatan',
+            'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
             'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
             'kegiatan' => $this->kinerjas->getKinerjaFilterByStatusKegiatanMelakukanAktivitas()->first()
         ];
@@ -93,10 +95,13 @@ class PesertaController extends Controller
     public function historyKegiatan($peserta)
     {
         $data = [
-            'link' => 'h_kegiatan',
+            'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
             'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
-            'detail_kinerjas' => $this->detail_kinerjas->detailKinerjaByIdPeserta($peserta)->get()
+            'kegiatan' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($peserta)->first(),
+            'detail_kinerjas' => $this->detail_kinerjas->detailKinerjaByIdPeserta($peserta)->paginate(5)
         ];
+
+        // dd($data['detail_kinerjas']);
 
         return view('peserta/history/index', $data);
     }

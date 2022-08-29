@@ -40,7 +40,7 @@ class Kinerjas extends Model
         })
         ->join('kegiatans', 'kinerjas.id_kegiatan', '=', 'kegiatans.id')
         ->leftJoin('sub_kegiatans', 'sub_kegiatans.id', 'detail_kinerjas.sub_kegiatan_diambil')
-        ->select(['detail_kinerjas.id as id_detail_kinerja', 'detail_kinerjas.status_kegiatan', 'kegiatans.kegiatan', 'kegiatans.keterangan', 'sub_kegiatans.sub_kegiatan']);
+        ->select(['detail_kinerjas.id as id_detail_kinerja', 'detail_kinerjas.status_kegiatan', 'kegiatans.id AS id_kegiatan', 'kegiatans.kegiatan', 'kegiatans.keterangan', 'sub_kegiatans.sub_kegiatan']);
     }
 
     public function subKegiatanWithKinerja($peserta)

@@ -1,29 +1,21 @@
 <header class="header-section w-100">
     <nav class="navbar navbar-expand-lg nav-header w-100">
         <div class="container">
-            <a class="navbar-brand">Kegiatan</a>
+            <a href="/peserta" class="navbar-brand">Kegiatan</a>
 
             <div class="nav-list">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Aktivitasku</a>
+                        <a class="nav-link {{ Request::is('peserta') ? "active" : "" }}" href="/peserta">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Request::is('peserta/kegiatanku/'.$peserta->id.'*') ? "active" : "" }}" href="/peserta/kegiatanku/{{ $peserta->id }}">Aktivitasku</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Absensiku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">History Kegiatan</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                        <a class="nav-link" href="/peserta/history-kegiatan/{{$peserta->id}}">History Kegiatan</a>
                     </li>
                 </ul>
             </div>
@@ -43,16 +35,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-center align-items-center flex-column" aria-current="page"
-                        href="#">
+                    <a class="nav-link d-flex justify-content-center align-items-center flex-column {{ Request::is('peserta/kegiatanku/'.$peserta->id.'*') ? "active" : "" }}" aria-current="page"
+                        href="/peserta/kegiatanku/{{ $peserta->id }}">
                         <i class="bi bi-clipboard-fill nav-icon"></i>
                         <p class="nav-name">Aktivitasku</p>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link d-flex justify-content-center align-items-center flex-column nav-home"
-                        aria-current="page" href="#">
+                    <a class="nav-link d-flex justify-content-center align-items-center flex-column nav-home {{ Request::is('peserta') ? "active" : "" }}"
+                        aria-current="page" href="/peserta">
                         <i class="bi bi-house-door-fill nav-icon"></i>
                         <p class="nav-name">Home</p>
                     </a>
@@ -60,7 +52,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link d-flex justify-content-center align-items-center flex-column" aria-current="page"
-                        href="#">
+                        href="/peserta/history-kegiatan/{{$peserta->id}}">
                         <i class="bi bi-hourglass-split nav-icon"></i>
                         <p class="nav-name">History Kegiatan</p>
                     </a>
