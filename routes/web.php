@@ -52,7 +52,13 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin/kegiatan/update/baru', 'saveUpdateKegiatan');
     Route::get('/admin/kegiatan/delete/{id}', 'deleteKegiatan');
     Route::get('/admin/kegiatan/addSub', 'tambahSub');
+    Route::post('/admin/kegiatan/tambah/saveSub', 'saveSub');
     Route::post('/admin/kegiatan/tambah/baru', 'saveKegiatan');
+
+    Route::get('/admin/kegiatan/detailKegiatan/{id}', 'detailKegiatan');
+    Route::get('/admin/kegiatan/detailKegiatan/update/{id}', 'updateSubKegiatan');
+    Route::post('/admin/kegiatan/detailKegiatan/saveUpdateSub', 'saveUpdateSubKegiatan');
+    Route::get('/admin/kegiatan/detailKegiatan/delete/{id}', 'deleteSubKegiatan');
 });
 
 // Peserta

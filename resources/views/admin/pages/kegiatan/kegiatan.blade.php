@@ -23,6 +23,7 @@
                                 <th class="cell"></th>
                                 <th class="cell"></th>
                                 <th class="cell"></th>
+                                <th class="cell"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,10 +36,13 @@
                                 <td class="cell">
                                     <a class="btn btn-primary" href="/admin/kegiatan/addSub">Tambah Sub Kegiatan</a>
                                 </td>
-                                <td>
+                                <td class="cell">
+                                    <a class="btn btn-primary" href="/admin/kegiatan/detailKegiatan/{{ $kegi->id }}">Detail</a>
+                                </td>
+                                <td class="cell">
                                     <a class="btn btn-warning" href="/admin/kegiatan/update/{{ $kegi->id }}">Update</a>
                                 </td>
-                                <td>
+                                <td class="cell">
                                     <a class="btn btn-danger" href="/admin/kegiatan/delete/{{ $kegi->id }}">Delete</a>
                                 </td>
                             </tr>

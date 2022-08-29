@@ -165,15 +165,70 @@ class AdminController extends Controller
 
     public function tambahSub()
     {
+
+        $kegiatans = DB::table('kegiatans')->get();
         return view('admin/pages/kegiatan/tambahsub', [
-            "title" => "Tambah SubKegiatan"
+            "title" => "Tambah SubKegiatan",
+            "kegiatan" => $kegiatans
         ]);
+    }
+
+    public function saveSub(Request $request)
+    {
+        for ($i = 0; $i < Count($request->subkegiatan); $i++) {
+            $data[] =
+                [
+                    'id_kegiatan' => $request->id_kegiatan,
+                    'sub_kegiatan' => $request->subkegiatan[$i],
+                    'created_at' => date("Y-m-d H:i:s", strtotime('now')),
+                    'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+                ];
+        };
+        DB::table('sub_kegiatans')->insert($data);
+
+        $sub_kegiatans = DB::table('sub_kegiatans')->get();
+        return redirect('admin/kegiatan');
     }
 
     public function deleteKegiatan($id)
     {
         DB::table('kegiatans')->where('id', $id)->delete();
         $kegiatans = DB::table('kegiatans')->get();
+        return redirect('admin/kegiatan');
+    }
+
+    public function detailKegiatan($id)
+    {
+        $kegiatans = DB::table('kegiatans')->where('id', $id)->get();
+        $subkegiatans = DB::table('sub_kegiatans')->where('id_kegiatan', $id)->get();
+        return view('admin/pages/kegiatan/detailKegiatan', [
+            "title" => "Detail Kegiatan",
+            "kegiatan" => $kegiatans,
+            "subkegiatan" => $subkegiatans,
+        ]);
+    }
+
+    public function updateSubKegiatan($id)
+    {
+        $subkegiatans = DB::table('sub_kegiatans')->where('id', $id)->get();
+        return view('admin/pages/kegiatan/updateSubKegiatan', [
+            "title" => "Edit Sub Kegiatan",
+            'subkegiatan' => $subkegiatans
+        ]);
+    }
+
+    public function saveUpdateSubKegiatan(Request $request)
+    {
+        DB::table('sub_kegiatans')->where('id', $request->id)->update([
+            'sub_kegiatan' => $request->sub_kegiatan,
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
+        return redirect('admin/kegiatan');
+    }
+
+    public function deleteSubKegiatan($id)
+    {
+        DB::table('sub_kegiatans')->where('id', $id)->delete();
         return redirect('admin/kegiatan');
     }
 }

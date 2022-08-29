@@ -8,12 +8,15 @@
         <div class="app-card-body">
             <form class="settings-form">
                 <div class="mb-3 after-add-more">
-                    <label for="subkegiatan" class="form-label">Sub Kegiatan</label>
+                    @foreach ($kegiatan as $kegi)
+                    <input type="hidden" name="id_kegiatan" value="{{ $kegi->id }}">
+                    @endforeach
+                    <label for="subkegiatan" class="form-label">Sub Kegiatan</label> 
+                    <button  type="button" class="btn app-btn-primary add-more mb-3">add
+                    </button>
                     <input type="subkegiatan" class="form-control" id="subkegiatan" name="subkegiatan[]">
                 </div>
-                <div class="mb-3">
-                    <button  type="button" class="btn btn-success add-more">Add</button>
-                </div>
+                
                 <button type="submit" class="btn app-btn-primary" >Update</button>
             </form>
         </div><!--//app-card-body-->
@@ -26,18 +29,14 @@
         <label for="subkegiatan" class="form-label">Sub Kegiatan</label>
         <input type="subkegiatan" class="form-control" id="subkegiatan" name="subkegiatan[]">
     </div>
-    <div class="mb-3">
-        <button class="btn btn-success add-more" type="button">Add</button>
-    </div>
 </div>
 
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
         $(".add-more").click(function(){ 
             var html = $(".copy").html();
             $(".after-add-more").after(html);
         });
-        console.log("bisaaaaa");
     });
 </script>
 
