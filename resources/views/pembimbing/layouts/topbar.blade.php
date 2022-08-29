@@ -24,7 +24,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="login.html">Log Out</a></li>
+                            <li><a class="dropdown-item" href="{{ url('pembimbing/login') }}">Log Out</a></li>
                         </ul>
                     </div>
                     <!--//app-user-dropdown-->

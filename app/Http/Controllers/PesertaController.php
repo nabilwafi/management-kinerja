@@ -36,7 +36,7 @@ class PesertaController extends Controller
         'link' => 'absensi'
         ];
         // $dataAbsensiDetail = Absensis::all();
-        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get();
+        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
         return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
@@ -117,18 +117,19 @@ class PesertaController extends Controller
         
     }
 
-    // public function updateJam()
 
     public function viewAbsen(Request $request, $id){
 
         $data = [
             'link' => 'absensi'
             ];
-        // $ip = $request->ip();
-        // $lokasi = Location::get($ip);
+
+            // $ip = '127.0.0.1';
+            // $lokasi = Location::get($ip);
+            // dd($lokasi);
         $Absensi = Absensis::where('id',$id)->first();
         $Absensi = json_decode(json_encode($Absensi),true);
-        // dd($ip);
+        
         return view('peserta.absensi.absen', $data)->with(compact('Absensi'));
     }
 
@@ -145,7 +146,7 @@ class PesertaController extends Controller
 
             Absensis::where('id', $id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan']]);
         }
-        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get();
+        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
         $data = [
             'link' => 'absensi'
 

@@ -6,7 +6,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
+               
                 <th scope="col">Tanggal Pertemuan</th>
                 <th scope="col">No Pertemuan</th>
                 <th scope="col">Nama Pembimbing</th>
@@ -20,7 +20,7 @@
         <tbody>
             @foreach ($dataAbsensiDetail as $absen)
                 <tr>
-                    <td scope="row" >{{ $absen['id'] }}</td>
+                    
                     <td>{{ $absen['tanggal_pertemuan'] }}</td>
                     <td>{{ $absen['no_pertemuan']}}</td>
                     <td>Pembimbing</td>

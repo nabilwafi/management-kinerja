@@ -22,18 +22,18 @@
                   <div class="form-group">
                     <label class="m-1">Tanggal Pertemuan</label>
                     <input type="date" class="form-control" value="{{ $Absensi['tanggal_pertemuan'] }}" readonly>
-                  {{-- <div class="form-group">
-                    <label class="m-1">Lokasi</label>
-                    {{-- @if ($lokasi)
-                    <input type="text" class="form-control" value="{{ $lokasi->zipCode }}" readonly>
-                    @endif --}}
-                  </div> 
+                  </div>
+                  <div class="form-group">
+                      <label class="m-1">Lokasi</label>
+                      <button type="button" onclick="getLocation()"> Lokasi </button>
+                      <p id="demo"></p> 
+                  </div>
                   <div class="form-group">
                     <label class="m-1">Keterangan</label>
                     <select name="keterangan" id="keterangan" class="form-control">
                       <option value="Hadir">Hadir</option>
-                      <option value="Tidak Hadir">Sakit</option>
-                      <option value="Tidak Hadir">Izin</option>
+                      <option value="Sakit">Sakit</option>
+                      <option value="Izin">Izin</option>
                     </select>
                   </div>
 
@@ -43,7 +43,23 @@
               </div>
             </div>
           </div>
-</div>
+    </div>
+    <script>
+      var x = document.getElementById("demo");
+      
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      
+      function showPosition(position) {
+        x.innerHTML = "Latitude: " + position.coords.latitude + 
+        "<br>Longitude: " + position.coords.longitude;
+      }
+      </script>
 @endsection
 
 @section('head')

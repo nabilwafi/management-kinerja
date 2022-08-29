@@ -44,6 +44,7 @@ Route::controller(PesertaController::class)->group(function() {
         //Login Route
         Route::match(['get','post'],'login','login');
         Route::match(['get','post'],'register','register');
+        Route::get('/logout','logout');
         Route::get('/', 'index');
         Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num');
         Route::get('/absensi/{num}', 'dataAbsensi')->whereNumber('num');
@@ -59,7 +60,14 @@ Route::controller(PesertaController::class)->group(function() {
 
 // Pembimbing
 Route::controller(PembimbingController::class)->group(function () {
-    Route::get('/pembimbing', 'index');
+    //Login Pembimbing
+    Route::get('/pembimbing', function() {
+        return view('form/login_pembimbing');
+        });
+    Route::get('/logout','logout');
+    Route::match(['get','post'],'/pembimbing/login','loginPembimbing');
+
+    Route::get('/pembimbing/index', 'index');
     Route::get('/pembimbing/peserta', 'dataPeserta');
     // Route::get('/pembimbing/pertemuan', 'dataPertemuan');
     Route::get('/pembimbing/detailabsensi', 'dataDetailAbsensi');
