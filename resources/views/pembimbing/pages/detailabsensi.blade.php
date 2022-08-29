@@ -1,8 +1,8 @@
 @extends('pembimbing/layouts/body')
 
 @section('content')
-<h1 class="app-page-title">Detail Absensi (nama peserta)</h1>
-<a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan">Tambah Pertemuan</a>
+<h1 class="app-page-title">Detail Absensi {{$nama}}</h1>
+<a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan/{{$id}}">Tambah Pertemuan</a>
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -21,7 +21,24 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data_absen as $psrt)
                             <tr>
+                                {{-- <td class="cell"><img src="/template/assets/images/users/{{ $psrt->gambar_peserta }}" alt="user1" width="50px"></td> --}}
+                                <td class="cell">{{ $psrt->tanggal_pertemuan }}</td>
+                                <td class="cell">{{ $psrt->no_pertemuan }}</td>
+                                <td class="cell">{{ $psrt->jam }}</td>
+                                <td class="cell">{{ $psrt->lokasi }}</td>
+                                <td class="cell">{{ $psrt->status }}</td>
+                                <td class="cell">{{ $psrt->keterangan }}</td>
+                                {{-- <td class="cell">{{ $psrt->instansi_pendidikan }}</td> --}}
+                                {{-- <td class="cell">{{ $psrt->jurusan }}</td> --}}
+                                <td class="cell text-center">
+                                <a class="btn btn-danger" href="/pembimbing/detailabsensi/delete/{{$psrt->id}}">Delete</a>
+                                    <a class="btn btn-warning" href="/pembimbing/editabsensi/{{$psrt->id}}">Update</a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            {{-- <tr>
                                 <td class="cell">15 Agustus 2022</td>
                                 <td class="cell">1</td>
                                 <td class="cell">09:30</td>
@@ -32,7 +49,7 @@
                                 <a class="btn btn-danger" href="#">Delete</a>
                                     <a class="btn btn-warning" href="/pembimbing/editabsensi">Update</a>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->

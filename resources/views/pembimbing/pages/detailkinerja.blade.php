@@ -1,23 +1,32 @@
 @extends('pembimbing/layouts/body')
 
 @section('content')
-<h1 class="fs-2 mb-3">Detail Kinerja (Nama)</h1>
+<h1 class="fs-2 mb-3">Detail Kinerja</h1>
 <div class="container mb-2">
 <h6 class="">Filter Sub Kegiatan</h6>
 <div class="row justify-content-between">
     <div class="col-4">
-        <select class="form-select form-select-sm ms-auto d-inline-flex w-auto pb-2 pt-2">
-            <option value="1" selected>Semua</option>
-            <option value="2">Perancangan</option>
-            <option value="3">Design</option>
-            <option value="3">Ngoding</option>
+        <form action="/pembimbing/detailkinerja/filtersubkegiatan/" method="post">
+        @csrf
+        @foreach ($kinerja as $kinerjas)
+        <input type="hidden" value="{{$kinerjas->id_peserta}}" name="id_peserta">
+        @endforeach
+        <select class="form-select form-select-sm ms-auto d-inline-flex w-auto pb-2 pt-2" id="pilihsub" name="pilihsub">
+            @foreach($sub_kegiatan as $sub_kegiatans)
+            <option value='{{$sub_kegiatans->id}}'>{{$sub_kegiatans->sub_kegiatan}}</option>
+            {{-- <input type="hidden" value="{{$id}}" name="id_sub"> --}}
+            @endforeach
         </select>
     </div>
-
+    <button type="submit" class="btn btn-primary me-2 mt-3 mb-3">Filter</button>
+    {{-- @foreach ($kinerja as $kinerjas)
+    <a class="btn btn-primary me-2 mt-3 mb-2" href='/pembimbing/filtersubkegiatan/{{$kinerjas->id_kegiatan}}'>Filter Sub Kegiatan</a>
+    @endforeach --}}
+</form>
     <div class="w-100"></div> {{--create a new row--}}
 
     <div class="col-4 mt-3">
-        <h6 class="">Total Durasi Pengerjaan (Sub Kegiatan) : 20 Jam</h6>
+        <h6 class="">Total Durasi Pengerjaan : {{$total}}</h6>
     </div>
     <div class="col-4">
         <a class="btn btn-success offset-md-7" href="#">Export to Excel</a>
@@ -31,8 +40,8 @@
     <table class="table app-table-hover mb-0 text-left">
         <thead>
             <tr>
-                <th class="cell">Tanggal</th>
-                <th class="cell">ID Kegiatan</th>
+                {{-- <th class="cell">Tanggal</th> --}}
+                {{-- <th class="cell">ID Kegiatan</th> --}}
                 <th class="cell">Judul Kegiatan</th>
                 <th class="cell">Sub Kegiatan</th>
                 <th class="cell">Keterangan</th>
@@ -41,7 +50,25 @@
             </tr>
         </thead>
         <tbody>
-          @for ($i = 0; $i < 5; $i++)
+            @foreach ($kinerja as $psrt)
+            <tr>
+                {{-- <td class="cell">{{$psrt->id_kegiatan}}</td> --}}
+                <td class="cell">{{$psrt->kegiatan}}</td>
+                <td class="cell">{{$psrt->sub_kegiatan}}</td>
+                <td class="cell">{{$psrt->keterangan}}</td>
+                <td class="cell">{{$psrt->duration}}</td>
+                <td class="cell">{{$psrt->status_kegiatan}}</td>
+                {{-- <td class="cell">12519205</td>
+                <td class="cell">Membuat Aplikasi Management Kinerja Anak Magang</td>
+                <td class="cell">Design</td>
+                <td class="cell">Merancang design yang user friendly</td>
+                <td class="cell">8 Jam</td> --}}
+                {{-- <td>
+                  <span class="badge bg-success">Selesai</span>
+                </td> --}}
+            </tr>
+            @endforeach
+          {{-- @for ($i = 0; $i < 5; $i++)
           <tr>
               <td class="cell">15 Agustus 2022</td>
               <td class="cell">12519205</td>
@@ -53,7 +80,7 @@
                 <span class="badge bg-success">Selesai</span>
               </td>
           </tr>
-          @endfor
+          @endfor --}}
         </tbody>
     </table>
         </div>

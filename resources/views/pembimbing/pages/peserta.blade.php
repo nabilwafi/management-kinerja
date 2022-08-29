@@ -14,24 +14,23 @@
                                 <th class="cell">Nama</th>
                                 <th class="cell">Instansi</th>
                                 <th class="cell">Jurusan</th>
-                                <th class="cell">Divisi</th>
-                                <th class="cell">Absensi</th>
                                 <th class="cell"></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($peserta as $psrt)
                             <tr>
-                                <td class="cell"><img src="/template/assets/images/users/user-1.jpg" alt="user1" width="50px"></td>
-                                <td class="cell">John Sanders</td>
-                                <td class="cell">UNIKOM</td>
-                                <td class="cell">Sistem Informasi</td>
-                                <td class="cell">Aplikasi Web</td>
-                                <td class="cell">15</td>
+                                <td class="cell"><img src="/template/assets/images/users/{{ $psrt->gambar_peserta }}" alt="user1" width="50px"></td>
+                                <td class="cell">{{ $psrt->nama_peserta }}</td>
+                                <td class="cell">{{ $psrt->instansi_pendidikan }}</td>
+                                <td class="cell">{{ $psrt->jurusan }}</td>
                                 <td class="cell text-center">
-                                <a class="btn btn-info" href="/pembimbing/detailabsensi/">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="/pembimbing/detailkinerja/">Detail Kinerja</a>
+                                    <a class="btn btn-info" href="/pembimbing/detailabsensi/{{$psrt->id}}">Detail Absensi</a>
+                                    <a class="btn btn-primary" href="/pembimbing/detailkinerja/{{$psrt->id}}">Detail Kinerja</a>
+                                    {{-- <a class="btn btn-primary" href="/pembimbing/filtersubkegiatan/">Detail Kinerja</a> --}}
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->
