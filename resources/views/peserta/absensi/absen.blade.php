@@ -25,8 +25,9 @@
                   </div>
                   <div class="form-group">
                       <label class="m-1">Lokasi</label>
-                      <button type="button" onclick="getLocation()"> Lokasi </button>
-                      <p id="demo"></p> 
+                      <button type="button" class="btn btn-warning" onclick="getLocation()"> Cek Lokasi </button>
+                      {{-- <input type="text" class="form-control" id="lokasi" name="lokasi" readonly> --}}
+                      <p id="lokasi" class="form-control" name="lokasi"></p>
                   </div>
                   <div class="form-group">
                     <label class="m-1">Keterangan</label>
@@ -45,7 +46,7 @@
           </div>
     </div>
     <script>
-      var x = document.getElementById("demo");
+      var x = document.getElementById("lokasi");
       
       function getLocation() {
         if (navigator.geolocation) {
@@ -56,8 +57,7 @@
       }
       
       function showPosition(position) {
-        x.innerHTML = "Latitude: " + position.coords.latitude + 
-        "<br>Longitude: " + position.coords.longitude;
+      x.innerHTML = position.coords.latitude +", "+ position.coords.longitude;
       }
       </script>
 @endsection
