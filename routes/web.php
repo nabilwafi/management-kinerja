@@ -37,6 +37,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/peserta/update/{id}', 'updatepeserta');
     Route::post('/admin/peserta/update/baru', 'saveUpdatepeserta');
     Route::get('/admin/peserta/delete/{id}', 'deletepeserta');
+    Route::get('/admin/peserta/pembimbing/{id}', 'addPem');
+    Route::post('/admin/peserta/tambah/savePem/{id}', 'savePemPeserta');
+
     //admin pembimbing
     Route::get('/admin/pembimbing', 'dataPembimbing');
     Route::get('/admin/pembimbing/tambah', 'tambahPembimbing');

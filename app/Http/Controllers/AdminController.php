@@ -58,6 +58,26 @@ class AdminController extends Controller
         return redirect('admin/peserta');
     }
 
+    public function addPem($id)
+    {
+        $pesertas = DB::table('pesertas')->where('id', $id)->get();
+        $pembimbings = DB::table('pembimbings')->get();
+        return view('admin/pages/peserta/tambahPembimbngPsrt', [
+            "title" => "add Pembimbing",
+            "peserta" => $pesertas,
+            "pembimbing" => $pembimbings
+        ]);
+    }
+
+    public function savePemPeserta(Request $request, $id)
+    {
+        DB::table('pesertas')->where('id', $id)->update([
+            'id_pembimbing' => $request->id_pem,
+            'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
+        ]);
+        return redirect('admin/peserta');
+    }
+
     //admin pembimbing
     public function dataPembimbing()
     {
@@ -85,7 +105,6 @@ class AdminController extends Controller
             'created_at' => date("Y-m-d H:i:s", strtotime('now')),
             'updated_at' => date("Y-m-d H:i:s", strtotime('now'))
         ]);
-        $pembimbings = DB::table('pembimbings')->get();
         return redirect('admin/pembimbing');
     }
     public function updatePembimbing($id)
