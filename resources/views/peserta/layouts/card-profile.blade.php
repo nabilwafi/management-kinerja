@@ -29,13 +29,13 @@
 
         <div class="card-footer">
             <a href="" class="btn btn-primary w-100 mb-3">Update</a>
-            @if(($kinerja->status_kegiatan || $kegiatan->status_kegiatan) == 'melakukan aktivitas')
+            @if(($kinerja->status_kegiatan) == 'melakukan aktivitas')
                 <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     Logout
                 </button>
             @else
-                <a href="" class="btn btn-danger w-100">Logout</a>
+                <a href="{{ url('peserta/login') }}" class="btn btn-danger w-100">Logout</a>
             @endif
         </div>
     </div>

@@ -12,7 +12,7 @@
                         <a class="nav-link {{ Request::is('peserta/kegiatanku/'.$peserta->id.'*') ? "active" : "" }}" href="/peserta/kegiatanku/{{ $peserta->id }}">Aktivitasku</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Absensiku</a>
+                        <a class="nav-link" href="/peserta/absensi/{{$peserta->id}}">Absensiku</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/peserta/history-kegiatan/{{$peserta->id}}">History Kegiatan</a>
@@ -27,20 +27,6 @@
                         </svg>
                     </a>
                 </div>
-
-                <div class="app-utilities col-auto">
-                    <div class="app-utility-item app-user-dropdown dropdown">
-                        <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                            role="button" aria-expanded="false">
-                            <img src={{ asset("template/assets/images/user.png") }}
-                                alt="user profile">
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                            <li><a class="dropdown-item" href="{{ url('peserta/login') }}">Log Out</a></li>
-                        </ul>
-                    </div>
-                    <!--//app-user-dropdown-->
-                </div>
                 <!--//app-utilities-->
             </div>
         </div>
@@ -52,7 +38,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link d-flex justify-content-center align-items-center flex-column" aria-current="page"
-                        href="#">
+                        href="/peserta/absensi/{{ $peserta->id }}">
                         <i class="bi bi-inbox-fill nav-icon"></i>
                         <p class="nav-name">Absensi</p>
                     </a>

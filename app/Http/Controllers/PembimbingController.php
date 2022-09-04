@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
-use App\Models\Pembimbings;
 use App\Models\Absensis;
 use App\Models\Pesertas;
 use Illuminate\Support\Facades\Auth;

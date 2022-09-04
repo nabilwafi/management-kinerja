@@ -20,15 +20,15 @@ class PesertaController extends Controller
         $this->detail_kinerjas = new Detail_Kinerjas();
     }
 
-    public function index($peserta)
+    public function index()
     {
         $id =  Auth::guard('peserta')->user()->id;
         $peserta = Pesertas::find($id);
 
         $data = [
-            'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
-            'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($peserta)->first(),
-            'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($peserta)->get()
+            'peserta' => $this->kinerjas->pesertaWithKinerja($id)->first(),
+            'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($id)->first(),
+            'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($id)->get()
         ];
         
 
@@ -52,7 +52,7 @@ class PesertaController extends Controller
             $detail_kinerja->sub_kegiatan_diambil = $request->sub_kegiatan_diambil;
 
             if($detail_kinerja->save()) {
-                return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
+                return redirect()->to('/peserta/kegiatanku/'.$id_peserta)->with('success', 'Success Selected Sub Category');
             }else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
             }
@@ -73,7 +73,7 @@ class PesertaController extends Controller
             // dd($id_kinerja);
 
             if($detail_kinerja->save()) {
-                return redirect()->route('kegiatanku', $id_peserta)->with('success', 'Success Selected Sub Category');
+                return redirect()->to('/peserta/kegiatanku/'.$id_peserta)->with('success', 'Success Selected Sub Category');
             }else {
                 return redirect()->back()->withInput()->with('error', 'Failed Selected Sub Category, Please check again!');
             }
@@ -107,9 +107,12 @@ class PesertaController extends Controller
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
         $persentase = $hadir/$absensi*100;
+        $peserta = $this->kinerjas->pesertaWithKinerja(Auth::guard('peserta')->user()->id)->first();
+        $kinerja = $this->kinerjas->getIdPesertaFromKinerja(Auth::guard('peserta')->user()->id)->first(['kinerjas.id_peserta']);
+        $kegiatan = $this->kinerjas->kinerjaJoinDetailFilterByPeserta(Auth::guard('peserta')->user()->id)->first();
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
-        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase', 'peserta', 'kinerja', 'kegiatan'));
     }
 
     public function historyKegiatan($peserta)
@@ -193,23 +196,23 @@ class PesertaController extends Controller
     }
 
 
-    public function viewAbsen(Request $request, $id){
-
-        $data = [
-            'link' => 'absensi'
-            ];
-
-            // $ip = '127.0.0.1';
-            // $lokasi = Location::get($ip);
-            // dd($lokasi);
+    public function viewAbsen($id)
+    {
         $Absensi = Absensis::where('id',$id)->first();
-        $Absensi = json_decode(json_encode($Absensi),true);
         
-        return view('peserta.absensi.absen', $data)->with(compact('Absensi'));
+        $data = [
+            'link' => 'absensi',
+            'peserta' => $this->kinerjas->pesertaWithKinerja(Auth::guard('peserta')->user()->id)->first(),
+            'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta(Auth::guard('peserta')->user()->id)->first(),
+            'Absensi' => json_decode(json_encode($Absensi),true)
+        ];
+
+        return view('peserta.absensi.absen', $data);
     }
 
 
-    public function absen(Request $request, $id){
+    public function absen(Request $request, $id)
+    {
         if ($request->isMethod('post')){
             $data = $request->all();
 
@@ -221,15 +224,7 @@ class PesertaController extends Controller
 
             Absensis::where('id', $id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan'], 'latitude'=>$data['latitude'], 'longitude'=>$data['longitude']]);
         }
-        $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
-        $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
-        $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
-        $persentase = $hadir/$absensi*100;
 
-        $data = [
-            'link' => 'absensi'
-
-            ];
-        return view ('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
+        return redirect()->to('/peserta/absensi/'.Auth::guard('peserta')->user()->id);
     }
 }
