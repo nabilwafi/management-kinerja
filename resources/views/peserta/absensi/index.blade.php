@@ -3,32 +3,43 @@
 @section('content')
 <h1 class="fs-2 mb-3">Data Absensi</h1>
 <div class="bg-white py-3 px-3 rounded shadow-sm">
+    <p>Total Pertemuan:{{$absensi}}</p>
+    <p>Total Kehadiran:{{$hadir}}</p>
+    <p>Persentase Kehadiran:{{round($persentase,2)}}%</p>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Tanggal Pertemuan</th>
                 <th scope="col">No Pertemuan</th>
-                <th scope="col">Nama Pembimbing</th>
+                <th scope="col">ID Pembimbing</th>
                 <th scope="col">Jam</th>
                 <th scope="col">Lokasi</th>
                 <th scope="col">Status</th>
                 <th scope="col">Keterangan</th>
+                <th scope="col">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @for($i = 0; $i < 5; $i++)
+            @foreach ($dataAbsensiDetail as $absen)
                 <tr>
-                    <th scope="row">1</th>
-                    <td>12-08-2022</td>
-                    <td>15204</td>
-                    <td>Rizki Nur Zhifar</td>
-                    <td>08:00:00</td>
-                    <td>Dinas Komunikasi, Informasi dan Statistik</td>
-                    <td>Terverifikasi</td>
-                    <td>Memabahas mengenai project</td>
+                    
+                    <td>{{ $absen['tanggal_pertemuan'] }}</td>
+                    <td>{{ $absen['no_pertemuan']}}</td>
+                    <td>Pembimbing</td>
+                    <td>{{ $absen['jam'] }}</td>
+                    
+                    <td style="width: 200px; height: 200px;">
+                    @if($absen['latitude']!=NULL && $absen['longitude']!=NULL)
+                        <iframe src="https://www.google.com/maps?q={{$absen['latitude']}},{{$absen['longitude']}}&z=15&output=embed" width="" height=""></iframe>
+                    </td>
+                    @endif
+                    <td>{{ $absen['status'] }}</td>
+                    <td>{{ $absen['keterangan'] }}</td>
+                    @if ($absen['tanggal_pertemuan'] == date("Y-m-d") && $absen['status'] == 'belum terverifikasi')
+                    <td><a class="btn btn-info" href="{{ url('peserta/absensi/view-absen/'.$absen['id'])}}">Absen</a></td>
+                    @endif
                 </tr>
-            @endfor
+            @endforeach
         </tbody>
     </table>
 </div>

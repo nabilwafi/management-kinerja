@@ -27,15 +27,44 @@
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{ asset('template/assets/images/app-logo.svg') }}" alt="logo"></a></div>
 					<h2 class="auth-heading text-center mb-5">Log in Peserta</h2>
+					@if(session()->has('message'))
+              <div class="alert alert-danger" role="alert">
+                {{ session()->get('message') }}
+              </div>
+              @endif
+					@if(Session::has('error_message'))
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error!</strong> {{ Session::get('error_message')}}
+                {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button> --}}
+              </div>
+              @endif
+             	 	@if ($errors->any())
+                	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                 	 @foreach ($errors->all() as $error)
+                 	 <li>{{ $error }}</li>
+                	@endforeach
+                	</div>
+              		@endif
+						@if(session('success'))
+							<p class="alert alert-success">{{ session('success') }}</p>
+						@endif
+						@if($errors->any())
+						@foreach($errors->all() as $err)
+							<p class="alert alert-danger">{{ $err }}</p>
+						@endforeach
+						@endif
 			        <div class="auth-form-container text-start">
-						<form class="auth-form login-form">         
+						<form class="auth-form login-form" method="post" action="{{ url('peserta/login') }}">        
+							@csrf 
 							<div class="email mb-3">
-								<label class="sr-only" for="signin-email">Email</label>
-								<input id="signin-email" name="signin-email" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+								<label class="sr-only" for="email">Email</label>
+								<input id="email" name="email" type="email" class="form-control" placeholder="Email address" required="required">
 							</div><!--//form-group-->
 							<div class="password mb-3">
-								<label class="sr-only" for="signin-password">Password</label>
-								<input id="signin-password" name="signin-password" type="password" class="form-control signin-password" placeholder="Password" required="required">
+								<label class="sr-only" for="password">Password</label>
+								<input id="password" name="password" type="password" class="form-control" placeholder="Password" required="required">
 								<div class="extra mt-3 row justify-content-between">
 									<div class="col-6">
 										<div class="form-check">
@@ -53,7 +82,7 @@
 							</div>
 						</form>
 						
-						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="signup.html" >here</a>.</div>
+						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="{{ url('form/register') }}" >here</a>.</div>
 					</div><!--//auth-form-container-->	
 
 			    </div><!--//auth-body-->
