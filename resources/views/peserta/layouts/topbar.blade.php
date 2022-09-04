@@ -3,7 +3,6 @@
         <div class="container">
             <a href="/peserta" class="navbar-brand">Kegiatan</a>
 
-<<<<<<< HEAD
             <div class="nav-list">
                 <ul class="navbar-nav">
                     <li class="nav-item">
@@ -19,7 +18,6 @@
                         <a class="nav-link" href="/peserta/history-kegiatan/{{$peserta->id}}">History Kegiatan</a>
                     </li>
                 </ul>
-=======
                 <div class="col-auto">
                     <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img">
@@ -44,7 +42,6 @@
                     <!--//app-user-dropdown-->
                 </div>
                 <!--//app-utilities-->
->>>>>>> origin/form
             </div>
         </div>
     </nav>

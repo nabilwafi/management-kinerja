@@ -20,8 +20,10 @@ class PesertaController extends Controller
         $this->detail_kinerjas = new Detail_Kinerjas();
     }
 
-    public function index($peserta = 1)
+    public function index($peserta)
     {
+        $id =  Auth::guard('peserta')->user()->id;
+        $peserta = Pesertas::find($id);
 
         $data = [
             'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
@@ -29,9 +31,6 @@ class PesertaController extends Controller
             'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($peserta)->get()
         ];
         
-        $id =  Auth::guard('peserta')->user()->id;
-
-        $peserta = Peserta::find($id);
 
         $type = $peserta['type'];
 

@@ -62,11 +62,8 @@
         <div class="col-md-9">
             <div class="card">
                 <div class="card-body">
-<<<<<<< HEAD
                     <h5 class="card-title">{{ $kinerja->kegiatan }}</h5>
                     <p class="card-text">{{ $kinerja->keterangan }}</p>
-
-=======
                     <h5 class="card-title">{{ Auth::guard('peserta')->user()->nama_peserta }}</h5>
                     <hr />
 
@@ -112,7 +109,6 @@
                             </div>
                         </li>
                     </ul>
->>>>>>> origin/form
 
                     @if($kinerja->status_kegiatan == 'melakukan aktivitas')
                         <div class="text-end button-web">
