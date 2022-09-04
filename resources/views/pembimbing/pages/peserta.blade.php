@@ -14,6 +14,7 @@
                                 <th class="cell">Nama</th>
                                 <th class="cell">Instansi</th>
                                 <th class="cell">Jurusan</th>
+                                <th class="cell">Type</th>
                                 <th class="cell"></th>
                             </tr>
                         </thead>
@@ -24,9 +25,12 @@
                                 <td class="cell">{{ $psrt->nama_peserta }}</td>
                                 <td class="cell">{{ $psrt->instansi_pendidikan }}</td>
                                 <td class="cell">{{ $psrt->jurusan }}</td>
+                                <td class="cell">{{ $psrt->type }}</td>
                                 <td class="cell text-center">
                                     <a class="btn btn-info" href="/pembimbing/detailabsensi/{{$psrt->id}}">Detail Absensi</a>
-                                    <a class="btn btn-primary" href="/pembimbing/detailkinerja/{{$psrt->id}}">Detail Kinerja</a>
+                                    @if ($psrt->type == 'belum terverifikasi')
+                                    <a class="btn btn-primary" href="/pembimbing/verifikasi/{{$psrt->id}}">Verifikasi</a>
+                                    @endif
                                     {{-- <a class="btn btn-primary" href="/pembimbing/filtersubkegiatan/">Detail Kinerja</a> --}}
                                 </td>
                             </tr>

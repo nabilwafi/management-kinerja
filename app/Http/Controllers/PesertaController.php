@@ -17,8 +17,20 @@ class PesertaController extends Controller
         $data = [
             'link' => 'overview'
         ];
+        
+        $id =  Auth::guard('peserta')->user()->id;
 
-        return view('peserta/index', $data);
+        $peserta = Pesertas::find($id);
+
+        $type = $peserta['type'];
+
+        if($type=='belum terverifikasi')
+        {
+            return redirect()->back()->with('message','Akun belum terverifikasi');
+
+        }else{
+            return view('peserta/index', $data);
+        }
     }
 
     public function kegiatanku()
@@ -37,9 +49,12 @@ class PesertaController extends Controller
         ];
         // $dataAbsensiDetail = Absensis::all();
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
+        $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
+        $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
+        $persentase = $hadir/$absensi*100;
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
-        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail'));
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
     }
 
     public function historyKegiatan()
@@ -144,13 +159,17 @@ class PesertaController extends Controller
 
             $this->validate($request, $rules);
 
-            Absensis::where('id', $id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan']]);
+            Absensis::where('id', $id)->update(['jam'=>date('H:i:s'), 'status'=>'menunggu verifikasi', 'keterangan'=>$data['keterangan'], 'latitude'=>$data['latitude'], 'longitude'=>$data['longitude']]);
         }
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
+        $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
+        $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
+        $persentase = $hadir/$absensi*100;
+
         $data = [
             'link' => 'absensi'
 
             ];
-        return view ('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail'));
+        return view ('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
     }
 }

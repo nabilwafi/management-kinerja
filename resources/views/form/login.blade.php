@@ -27,6 +27,11 @@
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="{{ asset('template/assets/images/app-logo.svg') }}" alt="logo"></a></div>
 					<h2 class="auth-heading text-center mb-5">Log in Peserta</h2>
+					@if(session()->has('message'))
+              <div class="alert alert-danger" role="alert">
+                {{ session()->get('message') }}
+              </div>
+              @endif
 					@if(Session::has('error_message'))
               <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Error!</strong> {{ Session::get('error_message')}}

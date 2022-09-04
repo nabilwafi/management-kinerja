@@ -11,7 +11,7 @@
                 </p> --}}
                 <form class="forms-sample"  method="post" action="{{ url('peserta/absen/'.$Absensi['id']) }}">
                     @csrf
-                    <div class="form-group">
+                  <div class="form-group">
                         <label class="m-1">ID Peserta</label>
                         <input type="text" class="form-control" value="{{ $Absensi['id_peserta'] }}" readonly>
                       </div>
@@ -24,12 +24,17 @@
                     <input type="date" class="form-control" value="{{ $Absensi['tanggal_pertemuan'] }}" readonly>
                   </div>
                   <div class="form-group">
-                      <label class="m-1">Lokasi</label>
-                      
-                      {{-- <input type="text" class="form-control" id="lokasi" name="lokasi"> --}}
-                      <p id="lokasi" class="form-control" name="lokasi"></p>
+                      <label class="m-1">Latitude</label>
                       <button type="button" class="btn btn-warning" onclick="getLocation()"> Cek Lokasi </button>
+                      <input type="text" class="form-control" name="latitude" value="" required>
+                       {{-- <p id="lokasi" class="form-control" name="lokasi"></p> --}}
                   </div>
+                  <div class="form-group">
+                    <label class="m-1">Longitude</label>
+                    <input type="text" class="form-control" name="longitude" value="" required>
+                    {{-- <p id="lokasi" class="form-control" name="lokasi"></p>
+                    <button type="button" class="btn btn-warning" onclick="getLocation()"> Cek Lokasi </button> --}}
+                </div>
                   <div class="form-group">
                     <label class="m-1">Keterangan</label>
                     <select name="keterangan" id="keterangan" class="form-control">
@@ -46,19 +51,27 @@
             </div>
           </div>
     </div>
-    <script>
-      var x = document.getElementById("lokasi");
+    <script type="text/javascript">
+      // var x = document.getElementById("lokasi");
       
       function getLocation() {
         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else { 
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
+          navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } 
       }
       
       function showPosition(position) {
-      x.innerHTML = position.coords.latitude +", "+ position.coords.longitude;
+      document.querySelector('.forms-sample input[name = "latitude"]').value = position.coords.latitude;
+      document.querySelector('.forms-sample input[name = "longitude"]').value = position.coords.longitude;
+      }
+
+      function showError(error){
+        switch(error.code){
+          case error.PERMISSION_DENIED:
+            alert('You must Allow The Request For GeoLocation To Fill Out the Form');
+            location.reload();
+            break;
+        }
       }
       </script>
 @endsection

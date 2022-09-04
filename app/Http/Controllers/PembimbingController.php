@@ -40,6 +40,14 @@ class PembimbingController extends Controller
         //     // "pst" => $users
         // ]);
     }
+    public function verifikasiPeserta($id){
+        $peserta = Pesertas::find($id);
+
+        $peserta->type="terverifikasi";
+        $peserta->save();
+
+        return redirect()->back();
+    }
     // public function getDataAbsensi(){
     //     $users = Peserta::join('absensi', 'id', '=', 'absensi.id_peserta')
     //                         ->get(['peserta.*', 'absensi.no_pertemuan']);
@@ -49,22 +57,30 @@ class PembimbingController extends Controller
         return view ('pembimbing/pages/pertemuan');
     }
     public function dataDetailAbsensi($id)
-    {
-        $pesertas = DB::table('pesertas')->where('id', $id)->get();
-        $namas = Pesertas::where('id', $id)->pluck('nama_peserta')->first();
-        $ids = Pesertas::where('id', $id)->pluck('id')->first();
-        $data_absens = DB::table('absensis')
-                ->join('pesertas', 'pesertas.id', '=', 'absensis.id_peserta')
-                ->select(['absensis.*'])
-                ->where('pesertas.id', $id)
-                ->get();
-        return view ('pembimbing/pages/detailabsensi', [
-            "title" => "Detail Absensi",
-            'peserta' => $pesertas,
-            'data_absen' => $data_absens,
-            'nama' => $namas,
-            'id' => $ids
-        ]);
+    {  
+
+       $dataAbsensi = Absensis::where('id_peserta', $id)->orderBy('no_pertemuan')->get();
+       $peserta = Pesertas::where('id',$id)->pluck('nama_peserta')->first();
+       $ids = Pesertas::where('id', $id)->pluck('id')->first();
+        $absensi = Absensis::where('id_peserta', $id)->get()->count();
+        $hadir = Absensis::where('id_peserta', $id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
+        $persentase = $hadir/$absensi*100;
+        return view('pembimbing.pages.detailabsensi')->with(compact('dataAbsensi','absensi','hadir','persentase','peserta','ids'));
+        // $pesertas = DB::table('pesertas')->where('id', $id)->get();
+        // $namas = Pesertas::where('id', $id)->pluck('nama_peserta')->first();
+        // $ids = Pesertas::where('id', $id)->pluck('id')->first();
+        // $data_absens = DB::table('absensis')
+        //         ->join('pesertas', 'pesertas.id', '=', 'absensis.id_peserta')
+        //         ->select(['absensis.*'])
+        //         ->where('pesertas.id', $id)
+        //         ->get();
+        // return view ('pembimbing/pages/detailabsensi', [
+        //     "title" => "Detail Absensi",
+        //     'peserta' => $pesertas,
+        //     'data_absen' => $data_absens,
+        //     'nama' => $namas,
+        //     'id' => $ids
+        // ]);
     }
 
     public function deleteAbsensi($id)

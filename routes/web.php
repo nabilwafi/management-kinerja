@@ -78,6 +78,7 @@ Route::controller(PembimbingController::class)->group(function () {
     Route::post('/pembimbing/editabsensi/update', 'saveEditAbsensi');
     Route::get('/pembimbing/detailkinerja/{id}', 'dataDetailKinerja');
     Route::post('/pembimbing/detailkinerja/filtersubkegiatan/', 'filterSubb');
+    Route::get('/pembimbing/verifikasi/{id}', 'verifikasiPeserta');
     // Route::get('/pembimbing/filtersubkegiatan/{id}', 'filterSubKegiatan');
     // Route::get('/pembimbing/detailabsensi/{id}')
 });

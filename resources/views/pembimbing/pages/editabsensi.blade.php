@@ -48,7 +48,7 @@
                     </select>
                   </div>
                   <button type="submit" class="btn btn-primary me-2 mt-3">Submit</button>
-                  <a class="btn btn-light mt-3" href="/pembimbing/detailabsensi/">Cancel</a>
+                  <a class="btn btn-light mt-3" href="/pembimbing/detailabsensi/{{$psrt->id_peserta}}">Cancel</a>
                 </div>
               </div>
             </div>

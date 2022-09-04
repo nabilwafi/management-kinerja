@@ -3,10 +3,12 @@
 @section('content')
 <h1 class="fs-2 mb-3">Data Absensi</h1>
 <div class="bg-white py-3 px-3 rounded shadow-sm">
+    <p>Total Pertemuan:{{$absensi}}</p>
+    <p>Total Kehadiran:{{$hadir}}</p>
+    <p>Persentase Kehadiran:{{round($persentase,2)}}%</p>
     <table class="table table-striped">
         <thead>
             <tr>
-               
                 <th scope="col">Tanggal Pertemuan</th>
                 <th scope="col">No Pertemuan</th>
                 <th scope="col">ID Pembimbing</th>
@@ -25,7 +27,12 @@
                     <td>{{ $absen['no_pertemuan']}}</td>
                     <td>Pembimbing</td>
                     <td>{{ $absen['jam'] }}</td>
-                    <td>{{ $absen['lokasi'] }}</td>
+                    
+                    <td style="width: 200px; height: 200px;">
+                    @if($absen['latitude']!=NULL && $absen['longitude']!=NULL)
+                        <iframe src="https://www.google.com/maps?q={{$absen['latitude']}},{{$absen['longitude']}}&z=15&output=embed" width="" height=""></iframe>
+                    </td>
+                    @endif
                     <td>{{ $absen['status'] }}</td>
                     <td>{{ $absen['keterangan'] }}</td>
                     @if ($absen['tanggal_pertemuan'] == date("Y-m-d") && $absen['status'] == 'belum terverifikasi')
