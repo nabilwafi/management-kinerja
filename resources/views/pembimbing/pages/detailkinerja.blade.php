@@ -31,8 +31,16 @@
         <div class="w-100"></div> {{-- create a new row --}}
 
         <div class="col-4 mt-3">
-            <h6 class="">Total Durasi Pengerjaan : {{ $total->hours }} Jam {{ $total->minutes }} Menit
-                {{ $total->seconds }} Detik</h6>
+            <h6 class="">Total Durasi Pengerjaan : 
+                @if($total->hours != 00)
+                        {{ $total->hours }} Jam
+                    @endif
+                    @if($total->minutes != 00)
+                        {{ $total->minutes }} Menit
+                    @endif
+                    @if($total->seconds != 00)
+                        {{ $total->seconds }} Detik
+                    @endif</h6>
         </div>
         <div class="col-4">
             <a class="btn btn-success offset-md-7" href="#">Export to Excel</a>

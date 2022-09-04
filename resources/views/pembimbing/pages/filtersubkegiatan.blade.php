@@ -28,7 +28,16 @@
     <div class="w-100"></div> {{--create a new row--}}
 
     <div class="col-4 mt-3">
-        <h6 class="">Total Durasi Pengerjaan {{$sub}} : 20 Jam</h6>
+        <h6 class="">Total Durasi Pengerjaan {{$sub}} :
+            @if($total->hours != 00)
+            {{ $total->hours }} Jam
+        @endif
+        @if($total->minutes != 00)
+            {{ $total->minutes }} Menit
+        @endif
+        @if($total->seconds != 00)
+            {{ $total->seconds }} Detik
+        @endif</h6>
     </div>
     <div class="col-4">
         <a class="btn btn-success offset-md-7" href="#">Export to Excel</a>
@@ -58,8 +67,17 @@
                 <td class="cell">{{$psrt->kegiatan}}</td>
                 <td class="cell">{{$psrt->sub_kegiatan}}</td>
                 <td class="cell">{{$psrt->keterangan}}</td>
-                <td class="cell">2 Jam</td>
-                <td class="cell">{{$psrt->status_kegiatan}}</td>
+                <td class="cell">
+                    @if($psrt->hours != 00)
+                        {{ $psrt->hours }} Jam
+                    @endif
+                    @if($psrt->minutes != 00)
+                        {{ $psrt->minutes }} Menit
+                    @endif
+                    @if($psrt->seconds != 00)
+                        {{ $psrt->seconds }} Detik
+                    @endif</td>
+                <td class="cell">{{ $psrt->status_kegiatan }}</td>
                 {{-- <td class="cell">12519205</td>
                 <td class="cell">Membuat Aplikasi Management Kinerja Anak Magang</td>
                 <td class="cell">Design</td>
