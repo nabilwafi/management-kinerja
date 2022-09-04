@@ -1,8 +1,8 @@
 @extends('pembimbing/layouts/body')
 
 @section('content')
-<h1 class="app-page-title">Detail Absensi {{$nama}}</h1>
-<a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan/{{$id}}">Tambah Pertemuan</a>
+<h1 class="app-page-title">Detail Absensi {{ $nama }}</h1>
+<a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan/{{ $id }}">Tambah Pertemuan</a>
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">
@@ -21,22 +21,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data_absen as $psrt)
-                            <tr>
-                                {{-- <td class="cell"><img src="/template/assets/images/users/{{ $psrt->gambar_peserta }}" alt="user1" width="50px"></td> --}}
-                                <td class="cell">{{ $psrt->tanggal_pertemuan }}</td>
-                                <td class="cell">{{ $psrt->no_pertemuan }}</td>
-                                <td class="cell">{{ $psrt->jam }}</td>
-                                <td class="cell">{{ $psrt->lokasi }}</td>
-                                <td class="cell">{{ $psrt->status }}</td>
-                                <td class="cell">{{ $psrt->keterangan }}</td>
-                                {{-- <td class="cell">{{ $psrt->instansi_pendidikan }}</td> --}}
-                                {{-- <td class="cell">{{ $psrt->jurusan }}</td> --}}
-                                <td class="cell text-center">
-                                <a class="btn btn-danger" href="/pembimbing/detailabsensi/delete/{{$psrt->id}}">Delete</a>
-                                    <a class="btn btn-warning" href="/pembimbing/editabsensi/{{$psrt->id}}">Update</a>
-                                </td>
-                            </tr>
+                            @foreach($data_absen as $psrt)
+                                <tr>
+                                    {{-- <td class="cell"><img src="/template/assets/images/users/{{ $psrt->gambar_peserta }}"
+                                    alt="user1" width="50px"></td> --}}
+                                    <td class="cell">{{ $psrt->tanggal_pertemuan }}</td>
+                                    <td class="cell">{{ $psrt->no_pertemuan }}</td>
+                                    <td class="cell">{{ $psrt->jam }}</td>
+                                    <td class="cell">{{ $psrt->lokasi }}</td>
+                                    <td class="cell">{{ $psrt->status }}</td>
+                                    <td class="cell">{{ $psrt->keterangan }}</td>
+                                    {{-- <td class="cell">{{ $psrt->instansi_pendidikan }}
+                                    </td> --}}
+                                    {{-- <td class="cell">{{ $psrt->jurusan }}</td>
+                                    --}}
+                                    <td class="cell text-center">
+                                        <a class="btn btn-danger"
+                                            href="/pembimbing/detailabsensi/delete/{{ $psrt->id }}">Delete</a>
+                                        <a class="btn btn-warning"
+                                            href="/pembimbing/editabsensi/{{ $psrt->id }}">Update</a>
+                                    </td>
+                                </tr>
                             @endforeach
                             {{-- <tr>
                                 <td class="cell">15 Agustus 2022</td>
@@ -52,10 +57,13 @@
                             </tr> --}}
                         </tbody>
                     </table>
-                </div><!--//table-responsive-->
-               
-            </div><!--//app-card-body-->		
-        </div><!--//app-card-->
+                </div>
+                <!--//table-responsive-->
+
+            </div>
+            <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
         <nav class="app-pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -68,8 +76,11 @@
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
-        </nav><!--//app-pagination-->
-        
-    </div><!--//tab-pane-->
-</div><!--//tab-content-->
+        </nav>
+        <!--//app-pagination-->
+
+    </div>
+    <!--//tab-pane-->
+</div>
+<!--//tab-content-->
 @endsection
