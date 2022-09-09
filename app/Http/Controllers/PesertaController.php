@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absensis;
+use App\Models\Pembimbings;
 use App\Models\Pesertas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,13 +49,20 @@ class PesertaController extends Controller
         'link' => 'absensi'
         ];
         // $dataAbsensiDetail = Absensis::all();
+        $pembimbing = Pembimbings::all();
+        $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
-        $persentase = $hadir/$absensi*100;
+        if($absensi == 0){
+            $persentase = 0;
+        }else{
+            $persentase = $hadir/$absensi*100;
+        }
+        
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
-        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase', 'pembimbing'));
     }
 
     public function historyKegiatan()
@@ -170,6 +178,6 @@ class PesertaController extends Controller
             'link' => 'absensi'
 
             ];
-        return view ('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
+        return view('peserta/absensi/index',$data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase'));
     }
 }
