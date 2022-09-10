@@ -21,7 +21,7 @@
                         <tbody>
                         @foreach ($peserta as $psrt)
                         <tr>
-                            <td class="cell"><img src="/template/assets/images/users/{{ $psrt->gambar_peserta }}" width="50px"></td>
+                            <td class="cell"><img src="/assets/images/{{ $psrt->gambar_peserta }}" width="50px"></td>
                             <td class="cell">{{ $psrt->email }}</td>
                             <td class="cell">{{ $psrt->nama_peserta }}</td>
                             <td class="cell">{{ $psrt->instansi_pendidikan }}</td>
@@ -32,12 +32,9 @@
                             </td>
                         </tr>
                         @endforeach
-                            
-
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->
-               
             </div><!--//app-card-body-->		
         </div><!--//app-card-->
         <nav class="app-pagination">
