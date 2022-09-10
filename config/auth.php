@@ -88,11 +88,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Pembimbings::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

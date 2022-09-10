@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -20,6 +22,32 @@ class AdminController extends Controller
         ]);
     }
 
+    public function loginAdmin(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->all();
+
+            $rules = [
+                'email' => 'required|email|max:255',
+                'password' => 'required',
+            ];
+
+            $customMessages = [
+                'email.required' => 'Email is Required',
+                'email.email' => 'Valid Email is Required',
+                'password.required' => 'Password is Required',
+            ];
+
+            $this->validate($request, $rules, $customMessages);
+            
+            if(Auth::guard('admin')->attempt(['email'=>$data['email'], 'password'=>$data['password']])){
+                return redirect('admin/index');
+            }else{
+                return redirect()->back()->with('error_message','Invalid Email or Password');
+            }
+        }
+        return view('form.login_admin');
+    }   
+
     //admin peserta
     public function dataPeserta()
     {
@@ -29,6 +57,7 @@ class AdminController extends Controller
             "peserta" => $pesertas
         ]);
     }
+
     public function updatePeserta($id)
     {
         $pesertas = DB::table('pesertas')->where('id', $id)->get();
@@ -67,12 +96,14 @@ class AdminController extends Controller
             "pembimbing" => $pembimbings
         ]);
     }
+
     public function tambahPembimbing()
     {
         return view('admin/pages/pembimbing/tambahpembimbing', [
             "title" => "Tambah Pembimbing"
         ]);
     }
+
     public function savePembimbing(Request $request)
     {
         DB::table('pembimbings')->insert([
@@ -88,6 +119,7 @@ class AdminController extends Controller
         $pembimbings = DB::table('pembimbings')->get();
         return redirect('admin/pembimbing');
     }
+
     public function updatePembimbing($id)
     {
         $pembimbings = DB::table('pembimbings')->where('id', $id)->get();
@@ -126,12 +158,14 @@ class AdminController extends Controller
             "kegiatan" => $kegiatans
         ]);
     }
+
     public function tambahKegiatan()
     {
         return view('admin/pages/kegiatan/tambahkegiatan', [
             "title" => "Tambah Kegiatan"
         ]);
     }
+
     public function saveKegiatan(Request $request)
     {
         DB::table('kegiatans')->insert([
@@ -143,6 +177,7 @@ class AdminController extends Controller
         $kegiatans = DB::table('kegiatans')->get();
         return redirect('admin/kegiatan');
     }
+
     public function updateKegiatan($id)
     {
         $kegiatans = DB::table('kegiatans')->where('id', $id)->get();

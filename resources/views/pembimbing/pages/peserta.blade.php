@@ -14,7 +14,8 @@
                                 <th class="cell">Nama</th>
                                 <th class="cell">Instansi</th>
                                 <th class="cell">Jurusan</th>
-                                <th class="cell"></th>
+                                <th class="cell">Type</th>
+                                <th class="cell text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

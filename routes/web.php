@@ -30,7 +30,14 @@ Route::get('/dashboard', function () {
 
 // Admin
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin', 'index');
+    // Login Admin
+    Route::get('/admin', function() {
+        return view('form/login_admin');
+    });
+    Route::get('/logout','logout');
+    Route::match(['get','post'],'/admin/login','loginAdmin');
+
+    Route::get('/admin/index', 'index');
     //admin peserta
     Route::get('/admin/peserta', 'dataPeserta');
     Route::get('/admin/peserta/update/{id}', 'updatepeserta');

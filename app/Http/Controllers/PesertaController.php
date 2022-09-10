@@ -6,7 +6,6 @@ use App\Models\Detail_Kinerjas;
 use App\Models\Kinerjas;
 use Illuminate\Http\Request;
 use App\Models\Absensis;
-use App\Models\Pembimbings;
 use App\Models\Pesertas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,24 +14,26 @@ class PesertaController extends Controller
 {
     protected $kinerjas;
     protected $detail_kinerjas;
+    protected $pesertas;
     public function __construct()
     {
         $this->kinerjas = new Kinerjas();
         $this->detail_kinerjas = new Detail_Kinerjas();
+        $this->pesertas = new Pesertas();
     }
 
     public function index()
     {
-        $id =  Auth::guard('peserta')->user()->id;
+        $id = Auth::guard('peserta')->user()->id;
         $peserta = Pesertas::find($id);
-
+        
         $data = [
-            'peserta' => $this->kinerjas->pesertaWithKinerja($id)->first(),
+            'peserta' => $this->pesertas->pesertaWithPembimbing($id)->first(),
             'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($id)->first(),
             'sub_kegiatans' => $this->kinerjas->subKegiatanWithKinerja($id)->get()
         ];
         
-
+        // dd($data['peserta']);
         $type = $peserta['type'];
 
         if($type=='belum terverifikasi')
@@ -88,7 +89,7 @@ class PesertaController extends Controller
     {
         
         $data = [
-            'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
+            'peserta' => $this->pesertas->pesertaWithPembimbing($peserta)->first(),
             'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
             'kegiatan' => $this->kinerjas->getKinerjaFilterByStatusKegiatanMelakukanAktivitas()->first()
         ];
@@ -104,13 +105,17 @@ class PesertaController extends Controller
         'link' => 'absensi',
         ];
         // $dataAbsensiDetail = Absensis::all();
-        $pembimbing = Pembimbings::all();
-        $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
+        // $pembimbing = Pembimbings::all();
+        // $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
-        $persentase = $hadir/$absensi*100;
-        $peserta = $this->kinerjas->pesertaWithKinerja(Auth::guard('peserta')->user()->id)->first();
+        if($absensi == 0){
+            $persentase = 0;
+        }else{
+            $persentase = $hadir/$absensi*100;
+        }
+        $peserta = $this->pesertas->pesertaWithPembimbing(Auth::guard('peserta')->user()->id)->first();
         $kinerja = $this->kinerjas->getIdPesertaFromKinerja(Auth::guard('peserta')->user()->id)->first(['kinerjas.id_peserta']);
         $kegiatan = $this->kinerjas->kinerjaJoinDetailFilterByPeserta(Auth::guard('peserta')->user()->id)->first();
 
@@ -121,7 +126,7 @@ class PesertaController extends Controller
     public function historyKegiatan($peserta)
     {
         $data = [
-            'peserta' => $this->kinerjas->pesertaWithKinerja($peserta)->first(),
+            'peserta' => $this->pesertas->pesertaWithPembimbing($peserta)->first(),
             'kinerja' => $this->kinerjas->getIdPesertaFromKinerja($peserta)->first(['kinerjas.id_peserta']),
             'kegiatan' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta($peserta)->first(),
             'detail_kinerjas' => $this->detail_kinerjas->detailKinerjaByIdPeserta($peserta)->paginate(5)
@@ -146,6 +151,7 @@ class PesertaController extends Controller
             $data = $request->all();
             // dd($data);
             // die;
+            dd($data);
 
             $rules = [
                 'email' => 'required|email|max:255',
@@ -158,12 +164,13 @@ class PesertaController extends Controller
                 'password.required' => 'Password is Required',
             ];
 
+            
             $this->validate($request, $rules, $customMessages);
-
+            
             if(Auth::guard('peserta')->attempt(['email'=>$data['email'], 'password'=>$data['password']])){
-            return redirect('peserta/');
+                return redirect('peserta/');
             }else{
-            return redirect()->back()->with('error_message','Invalid Email or Password');
+                return redirect()->back()->with('error_message','Invalid Email or Password');
             }
         }
     return view('form.login');

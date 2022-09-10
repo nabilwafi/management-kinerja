@@ -25,7 +25,7 @@ class PembimbingController extends Controller
         $pesertas = DB::table('pesertas')->get();
         return view ('pembimbing/pages/peserta', [
             "title" => "Peserta",
-            "peserta" => $pesertas
+            "pesertas" => $pesertas
             // "pst" => $users
         ]);
     }
@@ -144,23 +144,25 @@ class PembimbingController extends Controller
     {
         $detailkinerjas = DB::table('pesertas')->where('id', $id)->get();
         $kinerjas = DB::table('kinerjas')
+                ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
                 ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
-                ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'kinerjas.sub_kegiatan_diambil')
-                ->select(['kinerjas.*','sub_kegiatans.*','kegiatans.*'])
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%H") AS hours')
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%i") AS minutes')
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%s") AS seconds')
+                ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'detail_kinerjas.sub_kegiatan_diambil')
+                ->select(['kinerjas.*','sub_kegiatans.*','kegiatans.*', 'detail_kinerjas.status_kegiatan'])
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%H") AS hours')
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i") AS minutes')
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s") AS seconds')
                 ->where('kinerjas.id_peserta', $id)
-                ->where('kinerjas.status_kegiatan', '=', 'selesai')
+                ->where('detail_kinerjas.status_kegiatan', '=', 'selesai')
                 ->get();
         $totals = DB::table('kinerjas')
+        ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
         ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
-        ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'kinerjas.sub_kegiatan_diambil')
+        ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'detail_kinerjas.sub_kegiatan_diambil')
         ->where('kinerjas.id_peserta', $id)
-        ->where('kinerjas.status_kegiatan', '=', 'selesai')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%H")) AS hours')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%i")) AS minutes')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%s")) AS seconds')
+        ->where('detail_kinerjas.status_kegiatan', '=', 'selesai')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%H")) AS hours')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i")) AS minutes')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s")) AS seconds')
         ->first();
         // dd($totals);
         $id_kegiatans = DB::table('kinerjas')
@@ -193,29 +195,31 @@ class PembimbingController extends Controller
     {
         // dd($request->get('id_peserta'));
         $kinerjas = DB::table('kinerjas')
+                ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
                 ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
-                ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'kinerjas.sub_kegiatan_diambil')
-                ->select(['kinerjas.*','sub_kegiatans.*','kegiatans.*'])
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%H") AS hours')
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%i") AS minutes')
-                ->selectRaw('TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%s") AS seconds')
+                ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'detail_kinerjas.sub_kegiatan_diambil')
+                ->select(['kinerjas.*','sub_kegiatans.*','kegiatans.*', 'detail_kinerjas.status_kegiatan'])
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%H") AS hours')
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i") AS minutes')
+                ->selectRaw('TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s") AS seconds')
                 ->where('kinerjas.id_peserta', $request->get('id_peserta'))
                 ->where('sub_kegiatans.id', $request->get('pilihsub'))
-                ->where('kinerjas.status_kegiatan', '=', 'selesai')
+                ->where('detail_kinerjas.status_kegiatan', '=', 'selesai')
                 ->get();
         $subs = DB::table('sub_kegiatans')
         ->where('id', '=', $request->get('pilihsub'))
         ->pluck('sub_kegiatan')
         ->first();
         $totals = DB::table('kinerjas')
+        ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
         ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
-        ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'kinerjas.sub_kegiatan_diambil')
+        ->join('sub_kegiatans', 'sub_kegiatans.id', '=', 'detail_kinerjas.sub_kegiatan_diambil')
         ->where('kinerjas.id_peserta', $request->get('id_peserta'))
         ->where('sub_kegiatans.id', $request->get('pilihsub'))
-        ->where('kinerjas.status_kegiatan', '=', 'selesai')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%H")) AS hours')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%i")) AS minutes')
-        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(selesai_kinerja,mulai_kinerja), "%s")) AS seconds')
+        ->where('detail_kinerjas.status_kegiatan', '=', 'selesai')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%H")) AS hours')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i")) AS minutes')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s")) AS seconds')
         ->first();
         return view ('pembimbing/pages/filtersubkegiatan', [
             'kinerja' => $kinerjas,

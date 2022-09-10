@@ -3,6 +3,7 @@
 @section('content')
 <div class="container peserta-page-mobile">
     <div class="card">
+        @if ($kinerja)
         <div class="card-body">
             <h5 class="card-title">{{ $kinerja->kegiatan }}</h5>
             <p class="card-text">{{ $kinerja->keterangan }}</p>
@@ -32,16 +33,20 @@
             </form>
             @endif
         </div>
+        @else
+        <p>Tidak ada kegiatan</p>
+        @endif
     </div>
 </div>
 <div class="container peserta-page">
     <div class="row">
         <div class="col-md-9">
+            @if($kinerja)
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{ $kinerja->kegiatan }}</h5>
                     <p class="card-text">{{ $kinerja->keterangan }}</p>
-                    @if($kinerja->status_kegiatan == 'melakukan aktivitas')
+                    @if($kinerja && $kinerja->status_kegiatan == 'melakukan aktivitas')
                         <div class="text-end button-web">
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
@@ -68,6 +73,9 @@
                     @endif
                 </div>
             </div>
+            @else
+            <p>tidak ada kegiatan</p>
+            @endif
         </div>
 
         @include('peserta.layouts.card-profile')

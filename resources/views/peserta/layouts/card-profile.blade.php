@@ -22,14 +22,18 @@
                     <div class="list-title">
                         Nama Pembimbing :
                     </div>
-                    {{ $peserta->nama_pembimbing }}
+                    @if ($peserta->nama_pembimbing)
+                        {{ $peserta->nama_pembimbing }}
+                    @else
+                        Belum dipilihkan pebimbing
+                    @endif
                 </li>
             </ul>
         </div>
 
         <div class="card-footer">
             <a href="" class="btn btn-primary w-100 mb-3">Update</a>
-            @if(($kinerja->status_kegiatan) == 'melakukan aktivitas')
+            @if(($kinerja && $kinerja->status_kegiatan) == 'melakukan aktivitas')
                 <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">
                     Logout

@@ -19,6 +19,7 @@
     </div>
     <!--//app-wrapper-->
 
+		@if($kinerja)
 		<div class="modal modal-lg fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<form action="/peserta/update/{{ $kinerja->id ? $kinerja->id : $kegiatan->id_kegiatan }}/{{ $kinerja->id_peserta }}" method="post">
 				@csrf
@@ -40,7 +41,8 @@
 						</div>
 				</div>
 			</form>
-	</div>
+		</div>
+		@endif
 
     @include('peserta/layouts/script')
 </body>

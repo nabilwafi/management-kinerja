@@ -51,7 +51,7 @@
 						@endforeach
 						@endif
 			        <div class="auth-form-container text-start">
-						<form class="auth-form login-form" method="post" action="{{ url('pembimbing/login') }}">        
+						<form class="auth-form login-form" method="post" action="{{ url('admin/login') }}">        
 							@csrf 
 							<div class="email mb-3">
 								<label class="sr-only" for="email">Email</label>

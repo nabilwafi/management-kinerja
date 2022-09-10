@@ -25,7 +25,7 @@ class Pesertas extends Authenticatable
     
     public function pesertaWithPembimbing($peserta)
     {
-        return DB::table('pesertas')->join('pembimbings','pesertas.id_pembimbing', '=', 'pembimbings.id')->where('pesertas.id', '=', $peserta)->select(['pesertas.*', 'pembimbings.nama_pembimbing']);
+        return DB::table('pesertas')->Leftjoin('pembimbings','pesertas.id_pembimbing', '=', 'pembimbings.id')->where('pesertas.id', '=', $peserta)->select(['pesertas.*', 'pembimbings.nama_pembimbing']);
     }
     
 

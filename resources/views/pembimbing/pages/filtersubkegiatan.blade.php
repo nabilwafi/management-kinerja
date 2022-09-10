@@ -67,10 +67,6 @@
                 <td class="cell">{{$psrt->kegiatan}}</td>
                 <td class="cell">{{$psrt->sub_kegiatan}}</td>
                 <td class="cell">{{$psrt->keterangan}}</td>
-<<<<<<< HEAD
-                <td class="cell">2 Jam</td>
-                <td class="cell">{{$psrt->status_kegiatan}}</td>
-=======
                 <td class="cell">
                     @if($psrt->hours != 00)
                         {{ $psrt->hours }} Jam
@@ -82,7 +78,6 @@
                         {{ $psrt->seconds }} Detik
                     @endif</td>
                 <td class="cell">{{ $psrt->status_kegiatan }}</td>
->>>>>>> origin/Pembimbing
                 {{-- <td class="cell">12519205</td>
                 <td class="cell">Membuat Aplikasi Management Kinerja Anak Magang</td>
                 <td class="cell">Design</td>
@@ -129,8 +124,4 @@
 
 @section('head')
 <title>Pembimbing Dashboard | Detail Kinerja</title>
-<<<<<<< HEAD
 @endsection
-=======
-@endsection
->>>>>>> origin/Pembimbing
