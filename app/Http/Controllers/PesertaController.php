@@ -6,6 +6,7 @@ use App\Models\Detail_Kinerjas;
 use App\Models\Kinerjas;
 use Illuminate\Http\Request;
 use App\Models\Absensis;
+use App\Models\Pembimbings;
 use App\Models\Pesertas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -103,6 +104,8 @@ class PesertaController extends Controller
         'link' => 'absensi',
         ];
         // $dataAbsensiDetail = Absensis::all();
+        $pembimbing = Pembimbings::all();
+        $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();

@@ -63,7 +63,11 @@ class PembimbingController extends Controller
        $ids = Pesertas::where('id', $id)->pluck('id')->first();
         $absensi = Absensis::where('id_peserta', $id)->get()->count();
         $hadir = Absensis::where('id_peserta', $id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
-        $persentase = $hadir/$absensi*100;
+        if($absensi == 0){
+            $persentase = 0;
+        }else{
+            $persentase = $hadir/$absensi*100;
+        }
         return view('pembimbing.pages.detailabsensi')->with(compact('dataAbsensi','absensi','hadir','persentase','peserta','ids'));
         // $pesertas = DB::table('pesertas')->where('id', $id)->get();
         // $namas = Pesertas::where('id', $id)->pluck('nama_peserta')->first();
