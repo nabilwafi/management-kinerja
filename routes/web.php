@@ -111,6 +111,7 @@ Route::controller(PembimbingController::class)->group(function () {
     // Route::get('/pembimbing/filtersubkegiatan/{id}', 'filterSubKegiatan');
     // Route::get('/pembimbing/detailabsensi/{id}')
 });
+// Route::resource('/pembimbing/tambahpertemuan/baru', PembimbingController::class);
 
 
 require __DIR__ . '/auth.php';

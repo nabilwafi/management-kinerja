@@ -59,10 +59,13 @@
                             </tr> --}}
                         </tbody>
                     </table>
-                </div><!--//table-responsive-->
-               
-            </div><!--//app-card-body-->		
-        </div><!--//app-card-->
+                </div>
+                <!--//table-responsive-->
+
+            </div>
+            <!--//app-card-body-->
+        </div>
+        <!--//app-card-->
         <nav class="app-pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
@@ -75,8 +78,11 @@
                     <a class="page-link" href="#">Next</a>
                 </li>
             </ul>
-        </nav><!--//app-pagination-->
-        
-    </div><!--//tab-pane-->
-</div><!--//tab-content-->
+        </nav>
+        <!--//app-pagination-->
+
+    </div>
+    <!--//tab-pane-->
+</div>
+<!--//tab-content-->
 @endsection
