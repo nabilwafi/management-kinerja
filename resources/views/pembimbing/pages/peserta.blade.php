@@ -32,15 +32,14 @@
                                     <a class="btn btn-primary" href="/pembimbing/verifikasi/{{$psrt->id}}">Verifikasi</a>
                                     @endif
                                     <a class="btn btn-primary" href="/pembimbing/detailkinerja/{{$psrt->id}}">Detail Kinerja</a>
-                                    {{-- <a class="btn btn-primary" href="/pembimbing/filtersubkegiatan/">Detail Kinerja</a> --}}
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div><!--//table-responsive-->
-               
-            </div><!--//app-card-body-->		
+
+            </div><!--//app-card-body-->
         </div><!--//app-card-->
         <nav class="app-pagination">
             <ul class="pagination justify-content-center">
@@ -55,7 +54,7 @@
                 </li>
             </ul>
         </nav><!--//app-pagination-->
-        
+
     </div><!--//tab-pane-->
 </div><!--//tab-content-->
 @endsection

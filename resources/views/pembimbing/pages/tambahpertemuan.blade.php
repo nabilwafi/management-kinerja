@@ -9,9 +9,6 @@
             <div class="card">
               <div class="card-body">
                 <h4 class="card-title text-center">Tambah Pertemuan</h4>
-                {{-- <p class="card-description">
-                  Update Admin Password
-                </p> --}}
                   <input type="hidden" name="id_peserta" id="id_peserta" value="{{$data}}">
                   <input type="hidden" name="jam" id="jam" value="">
                   <input type="hidden" name="lokasi" id="lokasi" value="">
@@ -32,7 +29,7 @@
               </div>
             </div>
           </div>
-          
+
     @endsection
 </body>
-</html> 
+</html>

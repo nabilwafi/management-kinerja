@@ -73,7 +73,7 @@ Route::controller(PesertaController::class)->group(function () {
         Route::get('{num}', 'index')->name('home')->whereNumber('num');
         Route::patch('{kinerja}/{peserta}', 'updateSubKegiatanAndStatusKegiatan')->whereNumber('kinerja')->whereNumber('peserta');
         Route::patch('update/{kinerja}/{peserta}', 'updateStatusKegiatanAndSelesaiKinerja')->whereNumber('kinerja')->whereNumber('peserta');
-        
+
         Route::get('/kegiatanku/{num}', 'kegiatanku')->whereNumber('num')->name('kegiatanku');
 
         //Login Route
@@ -105,7 +105,6 @@ Route::controller(PembimbingController::class)->group(function () {
 
     Route::get('/pembimbing/index', 'index');
     Route::get('/pembimbing/peserta', 'dataPeserta');
-    // Route::get('/pembimbing/pertemuan', 'dataPertemuan');
     Route::get('/pembimbing/detailabsensi/{id}', 'dataDetailAbsensi');
     Route::get('pembimbing/detailabsensi/delete/{id}', 'deleteAbsensi');
     Route::get('/pembimbing/tambahpertemuan/{id}', 'dataTambahPertemuan');
@@ -115,10 +114,8 @@ Route::controller(PembimbingController::class)->group(function () {
     Route::get('/pembimbing/detailkinerja/{id}', 'dataDetailKinerja');
     Route::post('/pembimbing/detailkinerja/filtersubkegiatan/', 'filterSubb');
     Route::get('/pembimbing/verifikasi/{id}', 'verifikasiPeserta');
-    // Route::get('/pembimbing/filtersubkegiatan/{id}', 'filterSubKegiatan');
-    // Route::get('/pembimbing/detailabsensi/{id}')
+    Route::get('/pembimbing/peserta/cetak_pdf/{id}', 'cetak_pdf');
 });
-// Route::resource('/pembimbing/tambahpertemuan/baru', PembimbingController::class);
 
 
 require __DIR__ . '/auth.php';

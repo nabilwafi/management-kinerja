@@ -182,6 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Stevebauman\Location\LocationServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
 
         /*
@@ -209,7 +210,6 @@ return [
     | the aliases are "lazy" loaded so they don't hinder performance.
     |
     */
-
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Location' => 'Stevebauman\Location\Facades\Location',

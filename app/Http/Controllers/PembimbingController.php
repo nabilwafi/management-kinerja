@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Absensis;
 use App\Models\Pesertas;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Support\Facades\Auth;
-
+set_time_limit(300);
 
 class PembimbingController extends Controller
 {
@@ -26,7 +27,6 @@ class PembimbingController extends Controller
         return view ('pembimbing/pages/peserta', [
             "title" => "Peserta",
             "pesertas" => $pesertas
-            // "pst" => $users
         ]);
     }
 
@@ -44,7 +44,7 @@ class PembimbingController extends Controller
     }
 
     public function dataDetailAbsensi($id)
-    {  
+    {
 
         $dataAbsensi = Absensis::where('id_peserta', $id)->orderBy('no_pertemuan')->get();
         $peserta = Pesertas::where('id',$id)->pluck('nama_peserta')->first();
@@ -72,7 +72,7 @@ class PembimbingController extends Controller
             'data' => $datas
         ]);
     }
-    
+
     public function tambahPertemuan(Request $request)
     {
         DB::table('absensis')->insert([
@@ -133,8 +133,8 @@ class PembimbingController extends Controller
             }
         }
         return view('form.login_pembimbing');
-    }   
-    
+    }
+
     public function logout(){
         Auth::guard('pembimbing')->logout();
         return redirect('pembimbing/');
@@ -142,7 +142,8 @@ class PembimbingController extends Controller
 
     public function dataDetailKinerja($id)
     {
-        $detailkinerjas = DB::table('pesertas')->where('id', $id)->get();
+        $detailkinerjas = DB::table('pesertas')->where('id', $id)->pluck('id')->first();
+        // dd($detailkinerjas);
         $kinerjas = DB::table('kinerjas')
                 ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
                 ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
@@ -164,23 +165,18 @@ class PembimbingController extends Controller
         ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i")) AS minutes')
         ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s")) AS seconds')
         ->first();
-        // dd($totals);
         $id_kegiatans = DB::table('kinerjas')
                 ->select(['kinerjas.id_kegiatan'])
                 ->where('kinerjas.id_peserta', $id)
-                // ->where('kinerjas.id_kegiatan', 1)
                 ->first();
         $sub_kegiatans = DB::table('sub_kegiatans')
                 ->where('id_kegiatan', $id_kegiatans->id_kegiatan)
                 ->get();
-                // dd($sub_kegiatans);
         $ids = DB::table('kinerjas')
                 ->join('sub_kegiatans', 'sub_kegiatans.id_kegiatan', '=', 'kinerjas.id_kegiatan')
                 ->where('kinerjas.id_peserta', $id)
                 ->pluck('sub_kegiatans.id')
                 ->first();
-        // $subkegiatans = DB::table('sub_kegiatans')
-                        // ->join('')
         return view ('pembimbing/pages/detailkinerja', [
             "title" => "Detail Kinerja",
             'detailkinerja' => $detailkinerjas,
@@ -191,9 +187,38 @@ class PembimbingController extends Controller
         ]);
     }
 
+    public function cetak_pdf($id)
+    {
+        $namas = DB::table('pesertas')
+        ->where('id', $id)
+        ->pluck('nama_peserta')
+        ->first();
+        $instansis = DB::table('pesertas')
+        ->where('id', $id)
+        ->pluck('instansi_pendidikan')
+        ->first();
+        $kegiatans = DB::table('pesertas')
+        ->join('kinerjas', 'kinerjas.id_peserta', '=', 'pesertas.id')
+        ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')
+        ->where('pesertas.id', $id)
+        ->pluck('kegiatans.kegiatan')
+        ->first();
+        $totals = DB::table('detail_kinerjas')
+        ->join('sub_kegiatans', 'detail_kinerjas.sub_kegiatan_diambil', 'sub_kegiatans.id')
+        ->select('sub_kegiatan')
+        ->distinct('sub_kegiatan')
+        ->where('status_kegiatan', '=',  'selesai')
+        ->groupby('sub_kegiatan')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%H")) AS hours')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%i")) AS minutes')
+        ->selectRaw('sum(TIME_FORMAT(TIMEDIFF(detail_kinerjas.selesai_kinerja,detail_kinerjas.mulai_kinerja), "%s")) AS seconds')
+        ->get();
+        $pdf = FacadePdf::loadview('pembimbing/pages/peserta_pdf', ['total' => $totals, 'nama' => $namas, 'instansi' => $instansis, 'kegiatan' => $kegiatans]);
+        return $pdf->download('laporan-peserta.pdf');
+    }
+
     public function filterSubb(Request $request)
     {
-        // dd($request->get('id_peserta'));
         $kinerjas = DB::table('kinerjas')
                 ->join('detail_kinerjas', 'kinerjas.id', 'detail_kinerjas.id_kinerja')
                 ->join('kegiatans', 'kegiatans.id', '=', 'kinerjas.id_kegiatan')

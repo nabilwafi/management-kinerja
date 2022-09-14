@@ -23,7 +23,7 @@
         <div class="w-100"></div> {{-- create a new row --}}
 
         <div class="col-4 mt-3">
-            <h6 class="">Total Durasi Pengerjaan :
+            <h6 class="">Total Durasi Pengerjaan : 
                 @if($total->hours != 00)
                         {{ $total->hours }} Jam
                     @endif
@@ -35,7 +35,7 @@
                     @endif</h6>
         </div>
         <div class="col-4">
-            <a class="btn btn-success offset-md-7" href="/pembimbing/peserta/cetak_pdf/{{ $detailkinerja }}">Export to PDF</a>
+            <a class="btn btn-success offset-md-7" href="#">Export to PDF</a>
         </div>
     </div>
 </div>
@@ -46,6 +46,8 @@
             <table class="table app-table-hover mb-0 text-left">
                 <thead>
                     <tr>
+                        {{-- <th class="cell">Tanggal</th> --}}
+                        {{-- <th class="cell">ID Kegiatan</th> --}}
                         <th class="cell">Judul Kegiatan</th>
                         <th class="cell">Sub Kegiatan</th>
                         <th class="cell">Keterangan</th>
@@ -56,6 +58,7 @@
                 <tbody>
                     @foreach($kinerja as $psrt)
                         <tr>
+                            {{-- <td class="cell">{{$psrt->id_kegiatan }}</td> --}}
                             <td class="cell">{{ $psrt->kegiatan }}</td>
                             <td class="cell">{{ $psrt->sub_kegiatan }}</td>
                             <td class="cell">{{ $psrt->keterangan }}</td>
