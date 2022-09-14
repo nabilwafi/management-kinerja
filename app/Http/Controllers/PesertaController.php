@@ -7,6 +7,7 @@ use App\Models\Kinerjas;
 use Illuminate\Http\Request;
 use App\Models\Absensis;
 use App\Models\Pesertas;
+use App\Models\Pembimbings;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -108,6 +109,9 @@ class PesertaController extends Controller
         // $pembimbing = Pembimbings::all();
         // $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
+
+        $pembimbing = Pesertas::where('id', Auth::guard('peserta')->user()->id)->value('id_pembimbing');
+        $namaPembimbing = Pembimbings::where('id', $pembimbing)->value('nama_pembimbing');
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
         if($absensi == 0){
@@ -120,7 +124,7 @@ class PesertaController extends Controller
         $kegiatan = $this->kinerjas->kinerjaJoinDetailFilterByPeserta(Auth::guard('peserta')->user()->id)->first();
 
             // echo "<pre>"; print_r($dataAbsensiDetail); die;
-        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase', 'peserta', 'kinerja', 'kegiatan'));
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase', 'peserta', 'kinerja', 'kegiatan','namaPembimbing'));
     }
 
     public function historyKegiatan($peserta)
@@ -151,7 +155,7 @@ class PesertaController extends Controller
             $data = $request->all();
             // dd($data);
             // die;
-            dd($data);
+            // dd($data);
 
             $rules = [
                 'email' => 'required|email|max:255',
@@ -237,4 +241,6 @@ class PesertaController extends Controller
 
         return redirect()->to('/peserta/absensi/'.Auth::guard('peserta')->user()->id);
     }
+
+    
 }

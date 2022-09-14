@@ -26,7 +26,7 @@
                         
                         <td>{{ $absen['tanggal_pertemuan'] }}</td>
                         <td>{{ $absen['no_pertemuan']}}</td>
-                        <td>Pembimbing</td>
+                        <td>{{ $namaPembimbing }}</td>
                         <td>{{ $absen['jam'] }}</td>
                         
                         <td style="width: 200px; height: 200px;">

@@ -6,6 +6,7 @@
 <p>Total Kehadiran:{{$hadir}}</p>
 <p>Persentase Kehadiran:{{round($persentase,2)}}%</p>
 <a class="btn btn-primary mb-3" href="/pembimbing/tambahpertemuan/{{$ids}}">Tambah Pertemuan</a>
+<a class="btn btn-warning mb-3" href="/pembimbing/peserta/cetak_absensi/{{ $ids }}">Cetak Detail Absensi</a>
 <div class="tab-content" id="orders-table-tab-content">
     <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
         <div class="app-card app-card-orders-table shadow-sm mb-5">

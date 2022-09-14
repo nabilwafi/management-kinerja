@@ -90,7 +90,6 @@ Route::controller(PesertaController::class)->group(function () {
         //Melakukan Absensi
         Route::get('/absensi/view-absen/{id}', 'viewAbsen');
         Route::post('/absen/{id}','absen');
-
     });
 });
 
@@ -115,6 +114,7 @@ Route::controller(PembimbingController::class)->group(function () {
     Route::post('/pembimbing/detailkinerja/filtersubkegiatan/', 'filterSubb');
     Route::get('/pembimbing/verifikasi/{id}', 'verifikasiPeserta');
     Route::get('/pembimbing/peserta/cetak_pdf/{id}', 'cetak_pdf');
+    Route::get('/pembimbing/peserta/cetak_absensi/{id}', 'cetak_absensi');
 });
 
 

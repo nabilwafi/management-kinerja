@@ -217,6 +217,24 @@ class PembimbingController extends Controller
         return $pdf->download('laporan-peserta.pdf');
     }
 
+    public function cetak_absensi($id)
+    {
+        $dataAbsensi = Absensis::where('id_peserta', $id)->orderBy('no_pertemuan')->get();
+        $peserta = Pesertas::where('id',$id)->value('nama_peserta');
+        $instansi = Pesertas::where('id',$id)->pluck('instansi_pendidikan')->first();
+        $jurusan = Pesertas::where('id',$id)->pluck('jurusan')->first();
+        // $ids = Pesertas::where('id', $id)->pluck('id')->first();
+        $absensi = Absensis::where('id_peserta', $id)->get()->count();
+        $hadir = Absensis::where('id_peserta', $id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
+        if($absensi == 0){
+            $persentase = 0;
+        }else{
+            $persentase = $hadir/$absensi*100;
+        }
+        $pdf = FacadePdf::loadview('pembimbing/pages/detailabsensi_pdf', ['data'=>$dataAbsensi,'peserta'=> $peserta,'absensi'=> $absensi, 'hadir'=>$hadir,'persentase'=> $persentase, 'instansi'=>$instansi, 'jurusan'=>$jurusan]);
+        return $pdf->download('laporan-absensi.pdf');
+    }
+
     public function filterSubb(Request $request)
     {
         $kinerjas = DB::table('kinerjas')
