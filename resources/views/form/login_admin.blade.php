@@ -77,7 +77,8 @@
 							</div>
 						</form>
 					</div><!--//auth-form-container-->	
-
+					<div class="auth-option text-center pt-5">Pembimbing? Login Pembimbing <a class="text-link" href="{{ url('pembimbing') }}">here</a></div>
+					<div class="auth-option text-center pt-1">Peserta? Login Peserta <a class="text-link" href="{{ url('') }}">here</a></div>
 			    </div><!--//auth-body-->
 		    
 			    <footer class="app-auth-footer">

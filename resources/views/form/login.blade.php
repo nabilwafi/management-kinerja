@@ -81,8 +81,8 @@
 								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Log In</button>
 							</div>
 						</form>
-						
-						<div class="auth-option text-center pt-5">No Account? Sign up <a class="text-link" href="{{ url('form/register') }}" >here</a>.</div>
+						<div class="auth-option text-center pt-5">Pembimbing? Login Pembimbing <a class="text-link" href="{{ url('pembimbing') }}">here</a></div>
+						<div class="auth-option text-center pt-1">No Account? Sign up <a class="text-link" href="{{ url('form/register') }}" >here</a>.</div>
 					</div><!--//auth-form-container-->	
 
 			    </div><!--//auth-body-->
