@@ -49,9 +49,10 @@ class PesertaController extends Controller
         'link' => 'absensi'
         ];
         // $dataAbsensiDetail = Absensis::all();
-        $pembimbing = Pembimbings::all();
-        $namaPembimbing = Absensis::where('id_pembimbing', $pembimbing['id'])->get();
+        
         $dataAbsensiDetail = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->orderBy('no_pertemuan')->get();
+        $pembimbing = Pesertas::where('id', Auth::guard('peserta')->user()->id)->value('id_pembimbing');
+        $namaPembimbing = Pembimbings::where('id', $pembimbing)->value('nama_pembimbing');
         $absensi = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->get()->count();
         $hadir = Absensis::where('id_peserta', Auth::guard('peserta')->user()->id)->where('keterangan','Hadir')->where('status','terverifikasi')->get()->count();
         if($absensi == 0){
@@ -61,8 +62,8 @@ class PesertaController extends Controller
         }
         
 
-            // echo "<pre>"; print_r($dataAbsensiDetail); die;
-        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase', 'pembimbing'));
+            // dd($namaPembimbing); 
+        return view('peserta/absensi/index', $data)->with(compact('dataAbsensiDetail','absensi','hadir','persentase','namaPembimbing'));
     }
 
     public function historyKegiatan()
