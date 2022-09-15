@@ -27,6 +27,7 @@
                             <td class="cell">{{ $psrt->instansi_pendidikan }}</td>
                             <td class="cell">{{ $psrt->jurusan }}</td>
                             <td class="cell text-center">
+                            <a class="btn btn-success" href="/admin/peserta/pembimbing/{{ $psrt->id }}">Add Pembimbing</a>
                             <a class="btn btn-warning" href="/admin/peserta/update/{{ $psrt->id }}">Update</a>
                             <a class="btn btn-danger" href="/admin/peserta/delete/{{ $psrt->id }}">Delete</a>
                             </td>

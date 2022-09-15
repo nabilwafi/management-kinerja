@@ -99,7 +99,6 @@ class PembimbingController extends Controller
             'no_pertemuan' => $request->no_pertemuan,
             'tanggal_pertemuan' => $request->tanggal_pertemuan,
             'jam' => $request->jam,
-            'lokasi' => $request->lokasi,
             'status' => $request->status,
             'keterangan' => $request->keterangan
         ]);

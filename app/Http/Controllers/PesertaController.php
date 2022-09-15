@@ -216,12 +216,13 @@ class PesertaController extends Controller
         
         $data = [
             'link' => 'absensi',
-            'peserta' => $this->kinerjas->pesertaWithKinerja(Auth::guard('peserta')->user()->id)->first(),
-            'kinerja' => $this->kinerjas->kinerjaJoinDetailFilterByPeserta(Auth::guard('peserta')->user()->id)->first(),
+            'peserta' => $this->pesertas->pesertaWithPembimbing(Auth::guard('peserta')->user()->id)->first(),
+            'kinerja' => $this->kinerjas->getIdPesertaFromKinerja(Auth::guard('peserta')->user()->id)->first(['kinerjas.id_peserta']),
+            'kegiatan' => $this->kinerjas->getKinerjaFilterByStatusKegiatanMelakukanAktivitas()->first(),
             'Absensi' => json_decode(json_encode($Absensi),true)
         ];
 
-        return view('peserta.absensi.absen', $data);
+        return view('peserta/absensi/absen', $data);
     }
 
 

@@ -28,10 +28,6 @@
                     <input type="text" readonly class="form-control" id="jam" name="jam" value="{{$psrt->jam}}">
                   </div>
                   <div class="form-group">
-                    <label class="m-1">Lokasi</label>
-                    <input type="text" readonly class="form-control" id="lokasi" name="lokasi" value="{{$psrt->lokasi}}">
-                  </div>
-                  <div class="form-group">
                     <label class="m-1">Status</label>
                     <select name="status" id="status" class="form-control">
                       <option value="terverifikasi">Terverifikasi</option>
